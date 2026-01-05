@@ -6,6 +6,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "src": "/Admin/(.*)", "dest": "/api/admin?path=$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

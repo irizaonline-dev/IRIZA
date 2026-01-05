@@ -343,58 +343,60 @@
     <!-- custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/accordion.js"></script>
-    <script src="assets/js/api-client.js"></script>
     <script>
-	(function(){
-		// try to find registration form elements; if you have a different structure adapt ids
-		const form = document.querySelector('#register-form') || (function(){
-			// if no form exists create a simple inline handler for common ids
-			return null;
-		})();
-		// If a dedicated form doesn't exist, create a minimal registration form handler attached to a button with id "register-btn"
-		const registerBtn = document.getElementById('register-btn');
-		if(registerBtn){
-			registerBtn.addEventListener('click', async function(e){
-				e.preventDefault();
-				const name = (document.getElementById('reg-name') || {}).value || '';
-				const email = (document.getElementById('reg-email') || {}).value || '';
-				const role = (document.getElementById('reg-role') || {}).value || 'Customer';
-				if(!email || !name){
-					alert('Please provide name and email');
-					return;
-				}
-				try{
-					await API.collaborators.create({ name: name, email: email, role: role });
-					alert('Registration successful');
-					// optional: redirect to login
-					location.href = 'Log-in.html';
-				}catch(err){
-					console.error(err);
-					alert('Registration failed');
-				}
-			});
-		}
-		// If an actual form exists (id register-form), attach submit handler
-		if(form){
-			form.addEventListener('submit', async function(e){
-				e.preventDefault();
-				const fd = new FormData(form);
-				const name = fd.get('name') || fd.get('fullname') || '';
-				const email = fd.get('email') || '';
-				const role = fd.get('role') || 'Customer';
-				try{
-					await API.collaborators.create({ name, email, role });
-					alert('Registration successful');
-					form.reset();
-					location.href = 'Log-in.html';
-				}catch(err){
-					console.error(err);
-					alert('Registration failed');
-				}
-			});
-		}
-	})();
-</script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('reg-form');
+        if (!form) return;
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const first = (document.getElementById('exampleFirstName') || {}).value || '';
+            const last = (document.getElementById('exampleLastName') || {}).value || '';
+            const email = (document.getElementById('exampleInputEmail') || {}).value || '';
+            const password = (document.getElementById('examplePasswordInput') || {}).value || '';
+            const passwordRepeat = (document.getElementById('exampleRepeatPasswordInput') || {}).value || '';
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (!email || !first || !last) { alert('Please fill name and email'); return; }
+            if (password.length < 6) { alert('Password must be at least 6 characters'); return; }
+            if (password !== passwordRepeat) { alert('Passwords do not match'); return; }
+            submitBtn && (submitBtn.disabled = true);
+            try {
+                const name = (first + ' ' + last).trim();
+                const reg = await fetch('/api/auth/register', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email.trim().toLowerCase(), password, name, role: 'client' })
+                });
+                if (!reg.ok) {
+                    const err = await reg.json().catch(()=>({ message: 'Registration failed' }));
+                    alert(err.message || 'Registration failed');
+                    return;
+                }
+                // Auto-login after successful registration
+                const login = await fetch('/api/auth/login', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email.trim().toLowerCase(), password })
+                });
+                if (login.ok) {
+                    const data = await login.json();
+                    if (data && data.token) localStorage.setItem('iriza_api_token_v1', data.token);
+                    // redirect by role
+                    const role = (data && data.user && data.user.role) || 'client';
+                    if (role === 'admin') { window.location.href = 'Admin/Darshboard.html'; return; }
+                    if (role === 'collaborator') { window.location.href = 'Admin/profile.html'; return; }
+                    window.location.href = 'User/inbox.html';
+                } else {
+                    // fallback to login page
+                    alert('Registered successfully; please login');
+                    window.location.href = 'Log-in.html';
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Network error during registration');
+            } finally {
+                submitBtn && (submitBtn.disabled = false);
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

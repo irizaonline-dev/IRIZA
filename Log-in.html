@@ -364,11 +364,13 @@
                 e.preventDefault();
                 var email = (document.getElementById('email') || {}).value || '';
                 var password = (document.getElementById('password') || {}).value || '';
+                var submitBtn = form.querySelector('button[type="submit"]');
                 email = (email || '').trim().toLowerCase();
                 if (!email) {
                     alert('Please enter your email');
                     return;
                 }
+                submitBtn && (submitBtn.disabled = true);
                 try {
                     var res = await fetch('/api/auth/login', {
                         method: 'POST',
@@ -385,18 +387,14 @@
                         localStorage.setItem('iriza_api_token_v1', data.token);
                     }
                     var role = (data && data.user && data.user.role) || 'client';
-                    if (role === 'admin') {
-                        window.location.href = 'Admin/Darshboard.html';
-                        return;
-                    }
-                    if (role === 'collaborator') {
-                        window.location.href = 'Admin/profile.html';
-                        return;
-                    }
+                    if (role === 'admin') { window.location.href = 'Admin/Darshboard.html'; return; }
+                    if (role === 'collaborator') { window.location.href = 'Admin/profile.html'; return; }
                     window.location.href = 'User/inbox.html';
                 } catch (err) {
                     console.error(err);
                     alert('Network error');
+                } finally {
+                    submitBtn && (submitBtn.disabled = false);
                 }
             });
         });
