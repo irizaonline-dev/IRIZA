@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Staff - IRIZA RESTAURANT</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+<body>
+	<!-- ...existing header/nav similar to profile.html ... -->
+	<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="profile.html">IRIZA RESTAURANT</a>
+			<div class="d-flex ms-auto">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="profile.html">Back to Profile</a>
+				<a class="btn btn-primary btn-sm" href="staff.html">Refresh</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="d-flex align-items-center justify-content-between mb-3">
+			<div>
+				<h3 class="mb-0">Staff</h3>
+				<small class="text-muted">Manage collaborators & shifts</small>
+			</div>
+			<div>
+				<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staffModal"><i class="fas fa-plus"></i> Add Staff</button>
+			</div>
+		</div>
+
+		<div class="card shadow">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead class="table-light"><tr><th>Name</th><th>Role</th><th>Phone</th><th>Shift</th><th class="text-end">Actions</th></tr></thead>
+						<tbody id="staff-tbody"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Staff Modal -->
+	<div class="modal fade" id="staffModal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header"><h5 class="modal-title">Add Staff</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+				<form id="staff-form" onsubmit="return false;">
+					<div class="modal-body">
+						<input type="hidden" id="staff-id">
+						<div class="mb-3"><label class="form-label">Full name</label><input class="form-control" id="staff-name" required></div>
+						<div class="mb-3"><label class="form-label">Role</label><input class="form-control" id="staff-role" placeholder="e.g. Chef"></div>
+						<div class="mb-3"><label class="form-label">Phone</label><input class="form-control" id="staff-phone"></div>
+						<div class="mb-3"><label class="form-label">Shift</label><select class="form-select" id="staff-shift"><option>Morning</option><option>Afternoon</option><option>Night</option></select></div>
+					</div>
+					<div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary btn-sm" id="save-staff">Save</button></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		(function(){
+			var staff = [
+				{ id:1, name:'MBABAZI Joseph', role:'Manager', phone:'+250780000000', shift:'Morning' },
+				{ id:2, name:'Uwineza Jane', role:'Chef', phone:'+250780001111', shift:'Afternoon' }
+			];
+
+			function render(){
+				var $t = $('#staff-tbody').empty();
+				staff.forEach(function(s){
+					$t.append('<tr data-id="'+s.id+'"><td>'+s.name+'</td><td>'+s.role+'</td><td>'+s.phone+'</td><td>'+s.shift+'</td><td class="text-end"><button class="btn btn-sm btn-outline-primary edit-staff">Edit</button><button class="btn btn-sm btn-outline-danger remove-staff">Remove</button></td></tr>');
+				});
+			}
+
+			render();
+
+			$('#save-staff').on('click', function(){
+				var id = parseInt($('#staff-id').val(),10);
+				var name = $('#staff-name').val().trim(); if (!name) return $('#staff-name').focus();
+				var role = $('#staff-role').val().trim();
+				var phone = $('#staff-phone').val().trim();
+				var shift = $('#staff-shift').val();
+				if (id) {
+					var s = staff.find(x=>x.id===id); if (s) { s.name=name; s.role=role; s.phone=phone; s.shift=shift; }
+				} else {
+					var nid = staff.length?Math.max.apply(null,staff.map(x=>x.id))+1:1;
+					staff.push({ id:nid, name:name, role:role, phone:phone, shift:shift });
+				}
+				$('#staffModal').modal('hide'); render();
+			});
+
+			$(document).on('click', '.edit-staff', function(){
+				var id = $(this).closest('tr').data('id'), s = staff.find(x=>x.id===id);
+				if (!s) return;
+				$('#staff-id').val(s.id); $('#staff-name').val(s.name); $('#staff-role').val(s.role); $('#staff-phone').val(s.phone); $('#staff-shift').val(s.shift);
+				new bootstrap.Modal($('#staffModal')).show();
+			});
+
+			$(document).on('click', '.remove-staff', function(){ var id=$(this).closest('tr').data('id'); staff = staff.filter(x=>x.id!==id); render(); });
+		})();
+	</script>
+</body>
+</html>

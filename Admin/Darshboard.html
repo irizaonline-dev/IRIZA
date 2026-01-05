@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Admin Dashboard — Iriza Online</title>
+
+	<!-- External CSS links -->
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+	<link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+
+
+	<!-- Centralized quick-edit CSS: change variables to restyle page -->
+	<style>
+		:root{
+			--bg: #1f232d;
+			--panel: #232732;
+			--muted: #21252f;
+			--accent: #00bdff;
+			--text-light: #ffffff;
+			--card-radius: 6.5px;
+			--table-odd: #262a38;
+			--table-even: #212430;
+			--control-gap: .5rem;
+		}
+		body { background: var(--bg); color: var(--text-light); }
+		.container-fluid, .card { --bs-card-border-radius: var(--card-radius); }
+		.table thead { background: var(--muted); }
+		.table tbody tr:nth-child(odd){ background: var(--table-odd); }
+		.table tbody tr:nth-child(even){ background: var(--table-even); }
+		/* small helpers */
+		.btn-icon { padding: .35rem .55rem; }
+		.section { padding: .75rem 1rem; }
+		/* visually separate main regions for quick editing */
+		#topbar, #sidebar, #main, #footer { outline: none; }
+
+		/* new helpers */
+		.badge-status { font-size: .75rem; padding: .35rem .5rem; border-radius: 12px; }
+		.card-summary { background: linear-gradient(90deg,#232732,#1b1e26); border-radius: var(--card-radius); padding: .75rem; }
+	</style>
+</head>
+<body>
+	<!-- HEADER / TOPBAR -->
+	<header id="topbar" class="mb-2">
+		<nav class="navbar navbar-expand bg-dark sb-topnav navbar-dark">
+			<div class="container-fluid">
+				<button class="btn btn-link btn-sm link-light order-md-1" id="sidebarToggle" type="button"><i class="fa fa-bars" style="font-size: 20px;"></i></button>
+				<a class="navbar-brand" href="#"><img src="assets/img/desk.jpg" style="width: 28px;margin-right: 10px;border-width: 3px;border-style: solid;border-radius: 8px;">&nbsp;IRIZA MANAGEMENT</a>
+				<form class="d-none d-md-inline-block order-2 ms-auto me-0 me-md-3 my-2 my-md-0">
+					<div class="input-group">
+						<input class="form-control" type="text" placeholder=" Search for ...">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+				<ul class="navbar-nav d-flex order-3 ms-auto ms-md-0">
+					<li class="nav-item d-flex d-sm-flex d-md-none justify-content-center align-items-center justify-content-sm-center" style="margin-right: 7px;">
+						<div class="nav-item dropdown no-arrow">
+							<a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fa fa-search" style="font-size: 25px;margin-right: 0px;"></i> </a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">First Item</a>
+								<a class="dropdown-item" href="#">Second Item</a>
+								<a class="dropdown-item" href="#">Third Item</a>
+							</div>
+						</div>
+					</li>
+					<li class="nav-item d-flex justify-content-center align-items-center">
+						<div class="nav-item dropdown no-arrow">
+							<a class="dropdown-toggle active" aria-expanded="false" data-bs-toggle="dropdown" href="#">&nbsp;<img class="rounded-circle" src="assets/img/boy.jpg" style="width: 40px;border-width: 2px;border-style: solid;"></a>
+							<div class="dropdown-menu dropdown-menu-end text-start shadow" style="margin-top: 16px;">
+								<a class="dropdown-item" href="#">Pengaturan</a>
+								<a class="dropdown-item" href="#">Log Aktivitas</a>
+								<a class="dropdown-item" href="#">Pelanggaran</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Keluar</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div id="layoutSidenav">
+		<!-- SIDEBAR -->
+		<aside id="sidebar" aria-label="Main navigation">
+			<div id="sidenavAccordion" class="sb-sidenav accordion sb-sidenav-dark">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<!-- ...existing code... -->
+						<div class="sb-sidenav-menu-heading">Management</div>
+						<a class="nav-link active" href="table.html" data-section="collaborators">
+							<div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+							Ordered
+						</a>
+						<a class="nav-link" href="Orders2.html" data-section="tasks">
+							<div class="sb-nav-link-icon"><i class="fa fa-tasks"></i></div>
+							Orders
+						</a>
+						<a class="nav-link" href="analytics.html" data-section="finance">
+							<div class="sb-nav-link-icon"><i class="fa fa-wallet"></i></div>
+							Finance
+						</a>
+						<a class="nav-link" href="webhooks.html" data-section="tools">
+							<div class="sb-nav-link-icon"><i class="fa fa-tools"></i></div>
+							Tools
+						</a>
+						<!-- ...existing code... -->
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small">Logged in as</div>
+					<span>MBABAZI JOSEPH — Admin</span>
+				</div>
+			</div>
+		</aside>
+
+		<!-- MAIN CONTENT WRAPPER -->
+		<main id="main" class="section">
+			<div class="container-fluid" style="margin-bottom:50px;">
+				<!-- Page header and actions -->
+				<div class="row mb-3 align-items-center">
+					<div class="col-md-6">
+						<h3 class="text-white mb-0">Admin Dashboard</h3>
+						<small class="text-muted">Manage collaborators, tasks, finance and tools</small>
+					</div>
+					<div class="col-md-6 text-end">
+						<button id="add-collaborator" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add-collab"><i class="fa fa-user-plus"></i> Add Collaborator</button>
+						<button id="btn-export" class="btn btn-outline-light btn-sm" style="margin-left:.5rem;"><i class="fa fa-file-export"></i> Export CSV</button>
+						<button id="btn-bulk-delete" class="btn btn-danger btn-sm" style="margin-left:.5rem;"><i class="fa fa-trash"></i> Delete Selected</button>
+					</div>
+				</div>
+
+				<!-- finance summary -->
+				<div class="row mb-3">
+					<div class="col-md-4">
+						<div class="card-summary text-white">
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<div class="small text-muted">Total Collaborators</div>
+									<div id="summary-collab" class="h4 mb-0">0</div>
+								</div>
+								<div>
+									<i class="fa fa-users fa-2x" style="color:var(--accent)"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card-summary text-white">
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<div class="small text-muted">Open Orders</div>
+									<div id="summary-tasks" class="h4 mb-0">0</div>
+								</div>
+								<div><i class="fa fa-tasks fa-2x" style="color:#ffb74d"></i></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card-summary text-white">
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<div class="small text-muted">Outstanding (USD)</div>
+									<div id="summary-finance" class="h4 mb-0">0.00 FRW</div>
+								</div>
+								<div><i class="fa fa-wallet fa-2x" style="color:#00c561"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- simple approved orders list -->
+				<div class="row mb-3">
+					<div class="col-12">
+						<div class="card-summary text-white p-3">
+							<div class="d-flex justify-content-between">
+								<strong>Approved Orders (latest)</strong>
+								<small id="approved-count" class="text-muted">0</small>
+							</div>
+							<ul id="approved-orders-list" style="margin-top:.5rem;padding-left:1rem"></ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Table Card: updated columns & action buttons -->
+				<div class="card" id="TableSorterCard" style="border-style:none;border-radius:var(--card-radius);">
+					<div class="card-header py-3" style="background: rgb(23,25,33);">
+						<div class="row align-items-center">
+							<div class="col-6">
+								<p class="m-0 fw-bold" style="color:var(--text-light);">Collaborators</p>
+							</div>
+							<div class="col-6 text-end">
+								<button id="reset-filters" class="btn btn-dark btn-sm" type="button" style="margin: var(--control-gap);">Reset</button>
+								<button id="zoom_in" class="btn btn-light btn-sm btn-icon" type="button" aria-label="Zoom in" style="margin: var(--control-gap);"><i class="fa fa-search-plus"></i></button>
+								<button id="zoom_out" class="btn btn-light btn-sm btn-icon" type="button" aria-label="Zoom out" style="margin: var(--control-gap);"><i class="fa fa-search-minus"></i></button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-body p-0">
+						<div class="table-responsive text-center" style="background:#171921;">
+							<table class="table table-striped tablesorter" id="ipi-table">
+								<thead>
+									<tr>
+										<th class="text-center"><input id="select-all" type="checkbox" title="Select all"></th>
+										<th class="text-center">ID</th>
+										<th class="text-center">Restaurant</th>
+										<th class="text-center">Location</th>
+										<th class="text-center">Number</th>
+										<th class="text-center">Working Hours</th>
+										<th class="text-center filter-false sorter-false">Actions</th>
+									</tr>
+								</thead>
+								<tbody id="table-body">
+									<!-- Row template: edit this to change defaults for new rows -->
+									<template id="row-template">
+										<tr data-id="">
+											<td class="text-center align-middle"><input class="row-select" type="checkbox"></td>
+											<td class="text-nowrap id-cell">ID-000</td>
+											<td class="text-start restaurant-cell">Restaurant Name</td>
+											<td class="text-center loc-cell">Location</td>
+											<td class="text-nowrap phone-cell">+1-555-0000</td>
+											<td class="text-nowrap hours-cell">9:00 - 18:00</td>
+											<td class="text-center align-middle" style="height:60px;">
+												<button class="btn btn-link btn-icon view-row" title="View"><i class="far fa-eye" style="color:var(--accent);"></i></button>
+												<button class="btn btn-link btn-icon edit-row" title="Edit"><i class="fas fa-pen" style="color:#00c561"></i></button>
+												<button class="btn btn-link btn-icon delete-row" title="Delete"><i class="fas fa-trash" style="color:#dc3545"></i></button>
+											</td>
+										</tr>
+									</template>
+
+									<!-- Example rows -->
+									<tr data-id="C001">
+										<td class="text-center align-middle"><input class="row-select" type="checkbox"></td>
+										<td class="text-nowrap id-cell">C001</td>
+										<td class="text-start restaurant-cell">Mama's Diner</td>
+										<td class="text-center loc-cell">Downtown</td>
+										<td class="text-nowrap phone-cell">+250 788 123 456</td>
+										<td class="text-nowrap hours-cell">08:00 - 22:00</td>
+										<td class="text-center align-middle" style="height:60px;">
+											<button class="btn btn-link btn-icon view-row" title="View"><i class="far fa-eye" style="color:var(--accent);"></i></button>
+											<button class="btn btn-link btn-icon edit-row" title="Edit"><i class="fas fa-pen" style="color:#00c561"></i></button>
+											<button class="btn btn-link btn-icon delete-row" title="Delete"><i class="fas fa-trash" style="color:#dc3545"></i></button>
+										</td>
+									</tr>
+
+									<tr data-id="C002">
+										<td class="text-center align-middle"><input class="row-select" type="checkbox"></td>
+										<td class="text-nowrap id-cell">C002</td>
+										<td class="text-start restaurant-cell">Sunrise Cafe</td>
+										<td class="text-center loc-cell">Riverside</td>
+										<td class="text-nowrap phone-cell">+250 788 987 654</td>
+										<td class="text-nowrap hours-cell">07:00 - 15:00</td>
+										<td class="text-center align-middle" style="height:60px;">
+											<button class="btn btn-link btn-icon view-row" title="View"><i class="far fa-eye" style="color:var(--accent);"></i></button>
+											<button class="btn btn-link btn-icon edit-row" title="Edit"><i class="fas fa-pen" style="color:#00c561"></i></button>
+											<button class="btn btn-link btn-icon delete-row" title="Delete"><i class="fas fa-trash" style="color:#dc3545"></i></button>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Quick table controls -->
+						<div class="d-flex justify-content-between p-3">
+							<button id="btn-add-row" class="btn btn-sm btn-outline-primary">Add Row</button>
+							<div>
+								<button id="btn-delete-selected" class="btn btn-sm btn-outline-danger">Delete Selected</button>
+								<button id="btn-refresh" class="btn btn-sm btn-outline-secondary">Refresh</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Other page sections (forms, invoice, etc.) -->
+				<section>
+					<div class="container">
+						<div class="row mt-4">
+							<div class="col">
+								<div class="card shadow-sm mb-2 db-graph">
+									<div class="card-header p-2">
+										<h6 class="text-white m-0 font-md">Add new bill</h6>
+									</div>
+									<div class="card-body">
+										<form>
+											<div class="row">
+												<div class="col-md-9 col-xl-9">
+													<div class="box-bg">
+														<div class="row">
+															<div class="col-md-2 col-xl-2 align-self-center font-md text-dark-blue">
+																<label class="col-form-label p-0" for="table-no"><strong>Table No.:</strong><br></label>
+															</div>
+															<div class="col-md-4 col-xl-3">
+																<div class="mb-0 form-group mb-3">
+																	<select class="form-select form-select-sm font-sm">
+																		<option value="1" selected="">-- Choose Table --</option>
+																		<option value="1">SG1-TB1</option>
+																		<option value="2">SG1-TB2</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-2 col-xl-2 offset-md-3 offset-xl-4 align-self-center">
+																<button class="btn btn-info btn-sm d-block add-row btn-xs w-100" type="button"><i class="fa fa-plus"></i><strong>&nbsp;Add Item</strong></button>
+															</div>
+															<div class="col-md-1 col-xl-1 align-self-center">
+																<button class="btn btn-danger btn-sm d-block delete-row btn-xs w-100" type="button"><i class="fa fa-trash-o"></i></button>
+															</div>
+														</div>
+														<div class="table-responsive mt-1 tbl-wfx kot-table">
+															<table class="table table-sm">
+																<thead class="text-dark font-md">
+																	<tr class="text-dark-blue">
+																		<th class="text-center w-3x"><strong>#</strong></th>
+																		<th><strong>Product name</strong></th>
+																		<th class="w-10x"><strong>Qty.</strong></th>
+																		<th class="w-10x"><strong>Size</strong></th>
+																		<th class="w-10x"><strong>Rate</strong></th>
+																		<th class="w-10x"><strong>Amount</strong></th>
+																	</tr>
+																</thead>
+																<tbody class="h-15x">
+																	<tr>
+																		<td class="text-center pt-2 w-3x"><input type="checkbox"></td>
+																		<td>
+																			<div class="mb-1 form-group mb-3">
+																				<select class="form-select form-select-sm tbl-wfx kot-table font-sm">
+																					<option value="1" selected="">-- Select Product --</option>
+																					<option value="1">Cheese Burger</option>
+																					<option value="2">Cheese Pizza</option>
+																				</select>
+																			</div>
+																		</td>
+																		<td class="w-10x">
+																			<div class="mb-1 form-group mb-3">
+																				<input class="form-control form-control-sm font-sm" type="number" step="1" min="1">
+																			</div>
+																		</td>
+																		<td class="w-10x">
+																			<div class="mb-1 form-group mb-3">
+																				<select class="form-select form-select-sm font-sm">
+																					<option value="" selected="">select</option>
+																					<option value="">FULL</option>
+																					<option value="">HALF</option>
+																				</select>
+																			</div>
+																		</td>
+																		<td class="w-10x">
+																			<div class="mb-1 form-group mb-3">
+																				<input class="form-control form-control-sm font-sm" type="text" disabled="">
+																			</div>
+																		</td>
+																		<td class="w-10x">
+																			<div class="mb-1 form-group mb-3">
+																				<input class="form-control form-control-sm font-sm" type="text" disabled="">
+																			</div>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-xl-3">
+													<div class="box-bg">
+														<div class="row text-dark">
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Gross amount:</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<input class="form-control form-control-sm font-sm" type="text" disabled="">
+																</div>
+															</div>
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Parcel charges:</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<input class="form-control form-control-sm font-sm" type="text">
+																</div>
+															</div>
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Discount (%)</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<input class="form-control form-control-sm font-sm" type="text">
+																</div>
+															</div>
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Net amount:</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<input class="form-control form-control-sm font-sm" type="text" disabled="">
+																</div>
+															</div>
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Payment mode:</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<select class="form-select form-select-sm font-sm">
+																		<optgroup label="Payment mode">
+																			<option value="1" selected="">-- choose --</option>
+																			<option value="1">Cash</option>
+																			<option value="2">UPI</option>
+																			<option value="3">Swiggy</option>
+																		</optgroup>
+																	</select>
+																</div>
+															</div>
+															<div class="col-xl-5 offset-xl-0 align-self-center">
+																<h6 class="mb-0 font-sm">Payment status:</h6>
+															</div>
+															<div class="col-xl-7 offset-xl-0 text-end align-self-center">
+																<div class="mb-1 form-group mb-3">
+																	<select class="form-select form-select-sm font-sm" id="payment_stat-2" onchange="fn3();">
+																		<option value="unpaid">Not Paid</option>
+																		<option value="paid">Paid</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-xl-6 offset-xl-0 text-end">
+																<a class="btn btn-info btn-sm d-block mt-3 mb-1 btn-smd w-100" role="button" id="inv_btn-1" target="_blank" href="print-invoice.html"><i class="fa fa-print"></i><strong>&nbsp;Print Invoice</strong><br></a>
+															</div>
+															<div class="col-xl-6 offset-xl-0 text-end">
+																<button class="btn btn-danger btn-sm d-block mt-3 mb-1 btn-smd w-100" type="reset"><i class="fa fa-remove"></i><strong>&nbsp;Cancel</strong><br></button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
+	</div>
+
+	<!-- FOOTER -->
+	<footer id="footer" class="bg-dark text-center py-3">
+		<div class="container my-auto">
+			<div class="text-center my-auto copyright text-gray-100" style="font-size: 13.5px;">
+
+			</div>
+		</div>
+	</footer>
+
+	<!-- SCRIPTS: jQuery first, then plugins, then bootstrap, then app script -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/script.min.js"></script>
+	<script src="buttons.js"></script>
+	<script src="assets/js/collaborators.js"></script>
+
+	<!-- Add Collaborator Modal -->
+	<div class="modal fade" id="modal-add-collab" tabindex="-1" aria-labelledby="modalAddCollabLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark text-light">
+				<form id="form-add-collab">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalAddCollabLabel">Add Collaborator</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-2">
+							<label class="form-label">ID</label>
+							<input id="input-id" class="form-control form-control-sm" required>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Restaurant name</label>
+							<input id="input-restaurant" class="form-control form-control-sm" required>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Location</label>
+							<input id="input-location" class="form-control form-control-sm">
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Number</label>
+							<input id="input-number" class="form-control form-control-sm" inputmode="tel">
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Working hours</label>
+							<input id="input-hours" class="form-control form-control-sm" placeholder="e.g. 09:00 - 18:00">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+						<button id="modal-save-collab" type="submit" class="btn btn-primary btn-sm">Add</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- View / Edit Collaborator Modal (new) -->
+	<div class="modal fade" id="modal-view-edit" tabindex="-1" aria-labelledby="modalViewEditLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark text-light">
+				<form id="form-view-edit">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalViewEditLabel">Collaborator</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-2">
+							<label class="form-label">ID</label>
+							<input id="ve-id" class="form-control form-control-sm" required>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Restaurant name</label>
+							<input id="ve-restaurant" class="form-control form-control-sm" required>
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Location</label>
+							<input id="ve-location" class="form-control form-control-sm">
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Number</label>
+							<input id="ve-number" class="form-control form-control-sm" inputmode="tel">
+						</div>
+						<div class="mb-2">
+							<label class="form-label">Working hours</label>
+							<input id="ve-hours" class="form-control form-control-sm" placeholder="e.g. 09:00 - 18:00">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+						<button id="ve-save" type="submit" class="btn btn-primary btn-sm">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- inline script: add collaborators, add-row, delete, select-all, summary, view/edit -->
+	<script>
+		(function(){
+			const tbody = document.getElementById('table-body');
+			const template = document.getElementById('row-template');
+			const form = document.getElementById('form-add-collab');
+			const modalEl = document.getElementById('modal-add-collab');
+			const veModalEl = document.getElementById('modal-view-edit');
+			const selectAll = document.getElementById('select-all');
+			const btnAddRow = document.getElementById('btn-add-row');
+			const btnDeleteSelected = document.getElementById('btn-delete-selected');
+			const btnBulkTop = document.getElementById('btn-bulk-delete');
+			let bsModal = (window.bootstrap && modalEl) ? new bootstrap.Modal(modalEl) : null;
+			let bsVEModal = (window.bootstrap && veModalEl) ? new bootstrap.Modal(veModalEl) : null;
+			let currentEditRow = null; // holds the <tr> being viewed/edited
+
+			function updateSummary(){
+				const count = tbody.querySelectorAll('tr').length;
+				const el = document.getElementById('summary-collab');
+				if(el) el.textContent = count;
+			}
+
+			function createRow(values){
+				const clone = template.content.cloneNode(true);
+				const tr = clone.querySelector('tr');
+				if(!tr) return;
+				const id = values.id || ('ID-' + Date.now().toString().slice(-4));
+				tr.setAttribute('data-id', id);
+				const setText = (sel, txt) => { const e = tr.querySelector(sel); if(e) e.textContent = txt || ''; };
+				setText('.id-cell', id);
+				setText('.restaurant-cell', values.restaurant || '');
+				setText('.loc-cell', values.location || '');
+				setText('.phone-cell', values.number || '');
+				setText('.hours-cell', values.hours || '');
+				tbody.appendChild(clone);
+				updateSummary();
+			}
+
+			// Add-collab modal submit
+			if(form){
+				form.addEventListener('submit', function(e){
+					e.preventDefault();
+					const id = document.getElementById('input-id').value.trim();
+					const restaurant = document.getElementById('input-restaurant').value.trim();
+					const location = document.getElementById('input-location').value.trim();
+					const number = document.getElementById('input-number').value.trim();
+					const hours = document.getElementById('input-hours').value.trim();
+					if(!id || !restaurant){ alert('Provide at least ID and Restaurant name'); return; }
+					createRow({id, restaurant, location, number, hours});
+					form.reset();
+					if(bsModal) bsModal.hide();
+				});
+			}
+
+			// Add Row button
+			if(btnAddRow){
+				btnAddRow.addEventListener('click', function(){
+					const idx = Math.floor(Math.random()*900)+100;
+					createRow({
+						id: 'NEW' + idx,
+						restaurant: 'New Restaurant',
+						location: 'Unknown',
+						number: '',
+						hours: ''
+					});
+				});
+			}
+
+			// delegate clicks in tbody for delete, view, edit
+			tbody.addEventListener('click', function(e){
+				const del = e.target.closest && e.target.closest('.delete-row');
+				if(del){
+					const tr = del.closest('tr');
+					if(tr){ tr.remove(); updateSummary(); }
+					return;
+				}
+
+				const viewBtn = e.target.closest && e.target.closest('.view-row');
+				if(viewBtn){
+					const tr = viewBtn.closest('tr');
+					if(!tr) return;
+					openVEModal(tr, false); // view mode (readonly)
+					return;
+				}
+
+				const editBtn = e.target.closest && e.target.closest('.edit-row');
+				if(editBtn){
+					const tr = editBtn.closest('tr');
+					if(!tr) return;
+					openVEModal(tr, true); // edit mode
+					return;
+				}
+			});
+
+			// open view/edit modal for a row
+			function openVEModal(tr, editable){
+				currentEditRow = tr;
+				const getText = sel => (tr.querySelector(sel) && tr.querySelector(sel).textContent) || '';
+				document.getElementById('ve-id').value = getText('.id-cell');
+				document.getElementById('ve-restaurant').value = getText('.restaurant-cell');
+				document.getElementById('ve-location').value = getText('.loc-cell');
+				document.getElementById('ve-number').value = getText('.phone-cell');
+				document.getElementById('ve-hours').value = getText('.hours-cell');
+
+				// toggle readOnly & Save button
+				['ve-id','ve-restaurant','ve-location','ve-number','ve-hours'].forEach(id=>{
+					const el = document.getElementById(id);
+					if(el) el.readOnly = !editable;
+				});
+				const saveBtn = document.getElementById('ve-save');
+				if(saveBtn) saveBtn.style.display = editable ? '' : 'none';
+
+				if(bsVEModal) bsVEModal.show();
+			}
+
+			// save edits
+			const veForm = document.getElementById('form-view-edit');
+			if(veForm){
+				veForm.addEventListener('submit', function(e){
+					e.preventDefault();
+					if(!currentEditRow){ if(bsVEModal) bsVEModal.hide(); return; }
+					const id = document.getElementById('ve-id').value.trim();
+					const restaurant = document.getElementById('ve-restaurant').value.trim();
+					const location = document.getElementById('ve-location').value.trim();
+					const number = document.getElementById('ve-number').value.trim();
+					const hours = document.getElementById('ve-hours').value.trim();
+					if(!id || !restaurant){ alert('ID and Restaurant required'); return; }
+					// update row cells and data-id
+					currentEditRow.setAttribute('data-id', id);
+					const setCell = (sel, txt) => { const c = currentEditRow.querySelector(sel); if(c) c.textContent = txt || ''; };
+					setCell('.id-cell', id);
+					setCell('.restaurant-cell', restaurant);
+					setCell('.loc-cell', location);
+					setCell('.phone-cell', number);
+					setCell('.hours-cell', hours);
+					if(bsVEModal) bsVEModal.hide();
+					updateSummary();
+				});
+			}
+
+			// select-all
+			if(selectAll){
+				selectAll.addEventListener('change', function(){
+					const checked = !!this.checked;
+					tbody.querySelectorAll('.row-select').forEach(cb => cb.checked = checked);
+				});
+			}
+
+			// delete selected (top and bottom)
+			[btnDeleteSelected, btnBulkTop].forEach(b=>{
+				if(!b) return;
+				b.addEventListener('click', function(){
+					const checked = Array.from(tbody.querySelectorAll('.row-select:checked'));
+					if(!checked.length) return alert('No rows selected');
+					checked.forEach(cb => { const tr = cb.closest('tr'); if(tr) tr.remove(); });
+					if(selectAll) selectAll.checked = false;
+					updateSummary();
+				});
+			});
+
+			updateSummary();
+		})();
+	</script>
+
+	<script>
+		// dashboard: load persisted orders and compute Approved totals & pending count
+		(function(){
+			const KEY = 'iriza_orders_master';
+			function load(){
+				try{ return JSON.parse(localStorage.getItem(KEY) || '[]'); }catch(e){ return []; }
+			}
+			const orders = load();
+			if(!orders || !orders.length){
+				// nothing to show
+				return;
+			}
+			// compute approved total and pending count
+			let approvedTotal = 0;
+			const approved = [];
+			let pendingCount = 0;
+			orders.forEach(o=>{
+				const status = (o.status || '').toString();
+				// determine numeric total: prefer total, then amount
+				const t = Number(o.total || o.amount || ((o.qty||0) * (o.amount||0))) || 0;
+				if(status.toLowerCase() === 'approved'){
+					approvedTotal += t;
+					approved.push({ id: o.id, name: o.name, total: t });
+				}
+				if(status.toLowerCase() === 'pending') pendingCount++;
+			});
+			// update UI
+			const fin = document.getElementById('summary-finance');
+			if(fin) fin.textContent = (approvedTotal).toLocaleString() + ' FRW';
+			const tasks = document.getElementById('summary-tasks');
+			if(tasks) tasks.textContent = String(pendingCount);
+			// render small approved orders list (latest 6)
+			const listEl = document.getElementById('approved-orders-list');
+			const countEl = document.getElementById('approved-count');
+			if(listEl && approved.length){
+				approved.slice(-6).reverse().forEach(a=>{
+					const li = document.createElement('li');
+					li.style.marginBottom = '.25rem';
+					li.innerHTML = `${a.name || a.id} — ${a.id} • ${a.total.toLocaleString()} FRW`;
+					listEl.appendChild(li);
+				});
+				if(countEl) countEl.textContent = String(approved.length);
+			}
+		})();
+	</script>
+</body>
+</html>

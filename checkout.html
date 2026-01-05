@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — IRIZA</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "IRIZA.ONLINE",
+            "url": "https://www.greenlineconstruction.rw"
+        }
+    </script>
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <!-- libraries CSS -->
+    <link rel="stylesheet" href="assets/icon/flaticon_restics.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/splide/splide.min.css">
+    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/vendor/slim-select/slimselect.css">
+    <link rel="stylesheet" href="assets/vendor/animate-wow/animate.min.css">
+
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* minimal local styles for the order box */
+        #your-order{max-width:900px;margin:24px auto;padding:16px;background:#fff;border:1px solid #eee;border-radius:6px}
+        #your-order table{width:100%;border-collapse:collapse}
+        #your-order th,#your-order td{padding:8px;border-bottom:1px solid #f1f1f1;text-align:left}
+        .order-totals{max-width:420px;margin-top:12px}
+        .order-totals .row{display:flex;justify-content:space-between;padding:6px}
+        .order-totals .total{font-weight:700;font-size:1.1em}
+    </style>
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- SIDEBAR SECTION START -->
+    <div class="ul-sidebar">
+        <!-- header -->
+        <div class="ul-sidebar-header">
+            <div class="ul-sidebar-header-logo">
+                <a href="index.html">
+                    <img src="assets/img2/logo size.png" alt="logo" class="logo">
+                </a>
+            </div>
+            <!-- sidebar closer -->
+            <button class="ul-sidebar-closer"><i class="flaticon-close"></i></button>
+        </div>
+
+        <div class="ul-sidebar-header-nav-wrapper d-block d-lg-none"></div>
+
+
+        <!-- sidebar footer -->
+        <div class="ul-sidebar-footer">
+            <span class="ul-sidebar-footer-title">Follow us</span>
+
+            <div class="ul-sidebar-footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61584588002575"><i class="flaticon-facebook"></i></a>
+                                <a href="https://x.com/irizaonline"><i class="flaticon-twitter"></i></a>
+                                <a href="https://www.linkedin.com/in/irizaonline"><i class="flaticon-linkedin-big-logo"></i></a>
+                                <a href="https://www.youtube.com/@iriza.online"><i class="flaticon-youtube"></i></a>
+                                <a href="https://www.instagram.com/iriza.online"><i class="flaticon-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- SIDEBAR SECTION END -->
+
+    <!-- SEARCH MODAL SECTION START -->
+    <div class="ul-search-form-wrapper flex-grow-1 flex-shrink-0">
+        <button class="ul-search-closer"><i class="flaticon-close"></i></button>
+
+        <form action="#" class="ul-search-form">
+            <div class="ul-search-form-right">
+                <input type="search" name="search" id="ul-search" placeholder="Search Here">
+                <button type="submit"><span class="icon"><i class="flaticon-search"></i></span></button>
+            </div>
+        </form>
+    </div>
+    <!-- SEARCH MODAL SECTION END -->
+
+    <!-- HEADER SECTION START -->
+    <header class="ul-header">
+        <div class="header-top-bg-wrapper">
+            <div class="ul-header-top">
+                <div class="ul-header-container">
+                    <div class="ul-header-top-left">
+                        <div class="ul-header-contact-infos">
+                            <span class="ul-header-contact-info"><i class="flaticon-location-pin colored"></i> KG 644 ST 18 Kigali-Gasabo</span>
+                        </div>
+                    </div>
+
+                    <div class="ul-header-top-right">
+                        <div class="ul-header-auth-options">
+                            <i class="flaticon-user"></i>
+                            <a href="Log-in.html">Login</a>
+                            <span>/</span>
+                            <a href="Register.html">Register</a>
+                        </div>
+
+                        <div class="ul-header-socials">
+                            <span class="socials-title">Follow us: </span>
+                            <div class="links">
+                                <a href="https://www.facebook.com/profile.php?id=61584588002575"><i class="flaticon-facebook"></i></a>
+                                <a href="https://x.com/irizaonline"><i class="flaticon-twitter"></i></a>
+                                <a href="https://www.linkedin.com/in/irizaonline"><i class="flaticon-linkedin-big-logo"></i></a>
+                                <a href="https://www.youtube.com/@iriza.online"><i class="flaticon-youtube"></i></a>
+                                <a href="https://www.instagram.com/iriza.online"><i class="flaticon-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom-bg-wrapper to-be-sticky">
+            <div class="ul-header-bottom">
+                <div class="ul-header-bottom-wrapper ul-header-container">
+                    <div class="logo-container">
+                        <a href="index.html" class="d-inline-block"><img src="assets/img2/logo size.png" alt="logo" class="logo"></a>
+                    </div>
+
+                    <!-- header nav -->
+                    <div class="ul-header-nav-wrapper">
+                        <div class="to-go-to-sidebar-in-mobile">
+                            <nav class="ul-header-nav">
+                                <a href="index.html">Home</a>
+                                <a href="about.html">About</a>
+                                <div class="has-sub-menu">
+                                    <a role="button">Shop</a>
+
+                                    <div class="ul-header-submenu">
+                                        <ul>
+                                            <li><a href="shop.html">Shop</a></li>
+                                            <li><a href="shop-details.html">Shop Details</a></li>
+                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="has-sub-menu">
+                                    <a role="button">Pages</a>
+
+                                    <div class="ul-header-submenu">
+                                        <ul>
+                                            <li><a href="menu-1.html">Menu Style 1</a></li>
+                                            <li><a href="menu-2.html">Menu Style 2</a></li>
+                                            <li><a href="reservation.html">Reservation</a></li>
+                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="chef.html">Our Chef</a></li>
+                                            <li><a href="gallery.html">Gallery</a></li>
+                                            <li><a href="testimonials.html">Testimonials</a></li>
+                                            <li><a href="faq.html">FAQ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="has-sub-menu">
+                                    <a role="button">Blog</a>
+
+                                    <div class="ul-header-submenu">
+                                        <ul>
+                                            <li><a href="blog.html">Blogs</a></li>
+
+                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a href="contact.html">Contact</a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- actions -->
+                    <div class="ul-header-actions">
+                        <button class="ul-header-search-opener"><i class="flaticon-search"></i></button>
+                        <button><i class="flaticon-grocery-store"></i></button>
+                        <a href="shop.html" class="ul-btn d-sm-inline-flex d-none">order now <i class="flaticon-right"></i></a>
+                        <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i class="flaticon-menu"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER SECTION END -->
+
+
+    <main>
+        <!-- BREADCRUMB SECTION START -->
+        <div class="ul-breadcrumb">
+            <div class="wow animate__fadeInUp">
+                <h2 class="ul-breadcrumb-title">Checkout Page</h2>
+                <div class="ul-breadcrumb-nav">
+                    <a href="index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span class="current-page">Checkout Page</span>
+                </div>
+            </div>
+        </div>
+        <!-- BREADCRUMB SECTION END -->
+
+
+        <!-- CHECKOUT SECTION START -->
+        <div class="ul-container ul-section-spacing">
+            <h3 class="ul-checkout-title">Billing Details</h3>
+            <form action="#" class="ul-checkout-form">
+                <div class="row ul-bs-row row-cols-2 row-cols-xxs-1">
+                    <!-- left side / checkout form -->
+                    <div class="col">
+                        <div class="row row-cols-lg-2 row-cols-1 ul-bs-row">
+                            <!-- first name -->
+                            <div class="form-group">
+                                <label for="firstname">First Name*</label>
+                                <input type="text" name="firstname" id="firstname" placeholder="Enter Your First Name">
+                            </div>
+
+                            <!-- last name -->
+                            <div class="form-group">
+                                <label for="lastname">Last Name*</label>
+                                <input type="text" name="lastname" id="lastname" placeholder="Enter Your First Name">
+                            </div>
+
+                            <!-- company name -->
+                       
+
+                            <!-- country -->
+                            <!-- country -->
+                            <div class="form-group ul-checkout-country-wrapper">
+                                <label for="ul-checkout-country">LOCATION*</label>
+                                <select name="country" id="ul-checkout-country">
+                                    <option data-placeholder="true">Select Loaction</option>
+                                    <option value="2">Kacyiru</option>
+                                    <option value="3">Gisozi</option>
+                                    <option value="4">Kagugu</option>
+                                    <option value="5">Kinyinya</option>
+                                    <option value="6">Zindiro</option>
+                                    <option value="2">Masoro</option>
+                                    <option value="3">Nyabugogo</option>
+                                    <option value="4">Nyamirambo</option>
+                                    <option value="5">Kimisagara</option>
+                                    <option value="6">Nyarugenge</option>
+                                    <option value="2">Gikondo</option>
+                                    <option value="3">Kicukiro</option>
+                                    <option value="4">Gahanga</option>
+                                    <option value="5">Rebero</option>
+                                    <option value="6">Ahandi</option>
+                                </select>
+                            </div>
+
+                            <!-- address 1 -->
+                            <div class="form-group">
+                                <label for="address1">Street Address*</label>
+                                <input type="text" name="address1" id="address1" placeholder="KG 644 ST 18 Kigali-Gasabo">
+                            </div>
+
+                            <!-- address 2 -->
+                            <div class="form-group">
+                                <label for="address2">Apartment*</label>
+                                <input type="" name="address2" id="address2" placeholder="036">
+                            </div>
+
+                            <!-- city -->
+                            <div class="form-group">
+                                <label for="city">District*</label>
+                                <input type="text" name="city" id="city" placeholder="Enter Your District">
+                            </div>
+
+                            <!-- state -->
+                            <div class="form-group">
+                                <label for="state">Sector*</label>
+                                <input type="text" name="state" id="state" placeholder="Enter Your Sector">
+                            </div>
+
+                            <!-- postcode -->
+
+
+                            <!-- phone -->
+                            <div class="form-group">
+                                <label for="phone">Phone*</label>
+                                <input type="text" name="phone" id="phone" placeholder="Enter Your Phone Number">
+                            </div>
+
+                            <!-- email -->
+                            <div class="form-group col-lg-12">
+                                <label for="email">Email Address*</label>
+                                <input type="email" name="email" id="email" placeholder="Enter Your Email">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- right side / different address -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="ul-checkout-different-address-field">Shift to A Different Address</label>
+                            <textarea name="different-address" id="ul-checkout-different-address-field" placeholder="KG 644 ST 18 Kigali-Gasabo"></textarea>
+                        </div>
+
+                        <!-- different address checkbox -->
+                        <div class="ul-checkout-payment-methods">
+                            <!-- compact tabbed payment selector -->
+                            <label class="d-block mb-2">Choose Payment Method</label>
+
+                            <ul class="nav nav-pills mb-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab-mtn" data-bs-toggle="pill" href="#pane-mtn" role="tab">MTN MOMO</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-airtel" data-bs-toggle="pill" href="#pane-airtel" role="tab">AIRTEL MONEY</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-card" data-bs-toggle="pill" href="#pane-card" role="tab">CREDIT CARD</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content p-3 border rounded bg-light">
+                                <!-- MTN MOMO -->
+                                <div class="tab-pane fade show active" id="pane-mtn" role="tabpanel" aria-labelledby="tab-mtn">
+                                    <form id="payment-mtn" class="row g-2">
+            
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="tel" id="pm-number-mtn" placeholder="MTN Number">
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('proceedBtn').click();">Confirm MTN</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- AIRTEL MONEY -->
+                                <div class="tab-pane fade" id="pane-airtel" role="tabpanel" aria-labelledby="tab-airtel">
+                                    <form id="payment-airtel" class="row g-2">
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" id="pm-name-airtel" placeholder="Name">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="tel" id="pm-number-airtel" placeholder="Airtel Number">
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('proceedBtn').click();">Confirm Airtel</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- CREDIT CARD -->
+                                <div class="tab-pane fade" id="pane-card" role="tabpanel" aria-labelledby="tab-card">
+                                    <form id="payment-card" class="row g-2">
+                                        <div class="col-12">
+                                            <input class="form-control" type="text" id="card-name" placeholder="Name on card">
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control" type="text" id="card-number" placeholder="Card number">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" id="card-expiry" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" id="card-cvc" placeholder="CVC">
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('proceedBtn').click();">Pay with Card</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button id="proceedBtn" type="submit" class="ul-btn">PROCESS TO PAYMENT</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- bill summary -->
+            <div class="row ul-bs-row row-cols-2 row-cols-xxs-1">
+                <div class="ul-checkout-bill-summary">
+                    <h4 class="ul-checkout-bill-summary-title">Your Order</h4>
+
+                    <!-- added id so the existing render(summary) script can inject the order HTML -->
+                    <div id="your-order">
+                        <div class="ul-checkout-bill-summary-header">
+                            <span class="left">Product</span>
+                            <span class="right">Sub Total</span>
+                        </div>
+
+
+                        <div class="ul-checkout-bill-summary-body">
+                            <div class="single-row"><span class="left">Pain Relievers</span><span class="right">00 FRW</span></div>
+                            <div class="single-row"><span class="left">Sub Total</span><span class="right">00 FRW</span></div>
+                            <div class="single-row"><span class="left">Shipping</span><span class="right">Free</span></div>
+                        </div>
+
+                        <div class="ul-checkout-bill-summary-footer ul-checkout-bill-summary-header">
+                            <span class="left">Total</span>
+                            <span class="right">00 FRW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CHECKOUT SECTION END -->
+    </main>
+
+    <!-- FOOTER SECTION START -->
+    <footer class="ul-footer">
+        <div class="ul-footer-top">
+            <div class="ul-container">
+                <div class="ul-footer-top-wrapper wow animate__fadeInUp">
+                   <div class="ul-footer-about">
+                        <a href="index.html"><img src="assets/img2/logo copy.png" alt="logo"></a>
+                        <p class="ul-footer-about-txt">Fast, fresh, and full of taste. Enjoy the best meals from your favorite restaurants, delivered with love.</p>
+                        <div class="ul-footer-socials">
+                            <a href="https://www.facebook.com/profile.php?id=61584588002575"><i class="flaticon-facebook"></i></a>
+                                <a href="https://x.com/irizaonline"><i class="flaticon-twitter"></i></a>
+                                <a href="https://www.linkedin.com/in/irizaonline"><i class="flaticon-linkedin-big-logo"></i></a>
+                                <a href="https://www.youtube.com/@iriza.online"><i class="flaticon-youtube"></i></a>
+                                <a href="https://www.instagram.com/iriza.online"><i class="flaticon-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="ul-footer-widget">
+                        <h3 class="ul-footer-widget-title">Quick Links</h3>
+
+                        <div class="ul-footer-widget-links">
+                            <a href="about.html">About Us</a>
+                            <a href="services.html">Our Services</a>
+                            <a href="blog.html">Our Blogs</a>
+                            <a href="faq.html">FAQ’S</a>
+                            <a href="contact.html">Contact Us</a>
+                        </div>
+                    </div>
+
+                    <div class="ul-footer-widget">
+                        <h3 class="ul-footer-widget-title">Our Menu</h3>
+
+                        <div class="ul-footer-widget-links">
+                            <a href="shop.html">Burger King</a>
+                            <a href="shop.html">Pizza king</a>
+                            <a href="shop.html">Fresh Food</a>
+                            <a href="shop.html">Vegetable</a>
+                            <a href="shop.html">Desserts</a>
+                        </div>
+                    </div>
+
+                    <div class="ul-footer-widget ul-nwsltr-widget">
+                        <h3 class="ul-footer-widget-title">Newsletter</h3>
+                        <div class="ul-footer-widget-links">
+                            <span>Monday – Friday : <span class="colored">8am – 4pm</span></span>
+                            <span>Saturday : <span class="colored">8am – 12am</span></span>
+                        </div>
+                        <form action="#" class="ul-nwsltr-form">
+                            <div class="top">
+                                <input type="email" name="email" id="nwsltr-email" placeholder="Your Email Address" class="ul-nwsltr-input">
+                                <button type="submit"><i class="flaticon-arrow"></i></button>
+                            </div>
+
+                            <div class="agreement">
+                                <label for="nwsltr-agreement" class="ul-checkbox-wrapper">
+                                    <input type="checkbox" name="agreement" id="nwsltr-agreement" hidden>
+                                    <span class="ul-checkbox"><i class="flaticon-checked"></i></span>
+                                    <span class="ul-checkbox-txt">I agree with the <a href="#">Privacy Policy</a></span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- vector -->
+            <div class="ul-footer-vectors">
+                <img src="assets/img/footer-vector-1.svg" alt="Footer Image" class="ul-footer-vector-1">
+                <img src="assets/img/footer-vector-2.svg" alt="Footer Image" class="ul-footer-vector-2">
+                <img src="assets/img/footer-vector-3.svg" alt="Footer Image" class="ul-footer-vector-3">
+            </div>
+        </div>
+
+        <!-- footer bottom -->
+        <div class="ul-footer-bottom">
+            <div class="ul-container">
+                <div class="ul-footer-bottom-wrapper">
+                    <p class="copyright-txt">&copy;
+                        <script>document.write(new Date().getFullYear())</script> K-BASE GROUP LTD. All rights reserved
+                    </p>
+                    <div class="ul-footer-bottom-nav"><a href="#">Terms & Conditions</a> <a href="#">Privacy Policy</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER SECTION END -->
+
+    <!-- libraries JS -->
+    <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/splide/splide.min.js"></script>
+    <script src="assets/vendor/splide/splide-extension-auto-scroll.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/slim-select/slimselect.min.js"></script>
+    <script src="assets/vendor/animate-wow/wow.min.js"></script>
+    <script src="assets/vendor/splittype/index.min.js"></script>
+    <script src="assets/vendor/mixitup/mixitup.min.js"></script>
+    <script src="assets/vendor/fslightbox/fslightbox.js"></script>
+
+    <!-- custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api-client.js"></script>
+
+    <script>
+	(function(){
+		function parseCartFromStorage(){
+			try{ return JSON.parse(localStorage.getItem('iriza_cart')||'[]'); }catch(e){ return []; }
+		}
+		function loadCheckoutSummary(){
+			try{
+				const raw = localStorage.getItem('iriza_checkout');
+				if(!raw) return null;
+				return JSON.parse(raw);
+			}catch(e){
+				return null;
+			}
+		}
+		function formatCurrency(n){ return (n||0).toLocaleString() + ' FRW'; }
+
+		function buildSummaryFromCart(cart){
+			const items = cart.map(i=>({
+				id: i.id,
+				title: i.title,
+				price: i.price||0,
+				qty: i.qty||1,
+				subtotal: (i.price||0) * (i.qty||1)
+			}));
+			const subtotal = items.reduce((s,it)=> s + it.subtotal, 0);
+			return { items, subtotal, discount:0, shipping:0, total: subtotal, coupon: null, createdAt: null };
+		}
+
+		function render(summary){
+			const root = document.getElementById('your-order');
+			if(!root) return;
+			if(!summary || !Array.isArray(summary.items) || summary.items.length === 0){
+				root.innerHTML = '<p>Your cart is empty.</p>';
+				return;
+			}
+
+			const lines = [];
+			lines.push('<div class="order-items">');
+			lines.push('<table style="width:100%;border-collapse:collapse;">');
+			lines.push('<thead><tr><th style="text-align:left;padding:6px">Item</th><th style="padding:6px">Qty</th><th style="padding:6px">Price</th><th style="padding:6px">Subtotal</th></tr></thead>');
+			lines.push('<tbody>');
+			summary.items.forEach(it=>{
+				lines.push('<tr>');
+				lines.push('<td style="padding:6px;border-top:1px solid #eee">' + (it.title || 'Item') + '</td>');
+				lines.push('<td style="padding:6px;border-top:1px solid #eee;text-align:center">' + (it.qty||1) + '</td>');
+				lines.push('<td style="padding:6px;border-top:1px solid #eee;text-align:right">' + formatCurrency(it.price) + '</td>');
+				lines.push('<td style="padding:6px;border-top:1px solid #eee;text-align:right">' + formatCurrency(it.subtotal || (it.price*(it.qty||1))) + '</td>');
+				lines.push('</tr>');
+			});
+			lines.push('</tbody>');
+			lines.push('</table>');
+			lines.push('</div>');
+
+			lines.push('<div class="order-totals" style="margin-top:12px;max-width:420px;">');
+			lines.push('<div style="display:flex;justify-content:space-between;padding:6px"><strong>Subtotal</strong><span>' + formatCurrency(summary.subtotal) + '</span></div>');
+			if(summary.discount && summary.discount > 0){
+				lines.push('<div style="display:flex;justify-content:space-between;padding:6px;color:#080"><strong>Discount</strong><span>- ' + formatCurrency(summary.discount) + '</span></div>');
+			}
+			lines.push('<div style="display:flex;justify-content:space-between;padding:6px"><strong>Shipping</strong><span>' + (summary.shipping ? formatCurrency(summary.shipping) : 'Free') + '</span></div>');
+			lines.push('<div style="display:flex;justify-content:space-between;padding:6px;border-top:1px solid #ddd;margin-top:6px"><strong>Total</strong><span style="font-size:1.1em;font-weight:600">' + formatCurrency(summary.total) + '</span></div>');
+			if(summary.coupon) lines.push('<div style="margin-top:6px;color:#0a0">Coupon: ' + summary.coupon + '</div>');
+			lines.push('</div>');
+
+			root.innerHTML = lines.join('');
+		}
+
+		// load checkout summary saved by cart page, fallback to cart
+		let summary = loadCheckoutSummary();
+		if(!summary){
+			const cart = parseCartFromStorage();
+			if(cart && cart.length) summary = buildSummaryFromCart(cart);
+		}
+		// ensure item subtotals exist
+		if(summary && Array.isArray(summary.items)){
+			summary.items = summary.items.map(it=>{
+				it.price = it.price || 0;
+				it.qty = it.qty || 1;
+				it.subtotal = it.subtotal || (it.price * it.qty);
+				return it;
+			});
+			// compute totals if absent
+			summary.subtotal = summary.subtotal || summary.items.reduce((s,i)=> s + (i.subtotal||0), 0);
+			summary.discount = summary.discount || 0;
+			summary.shipping = summary.shipping || 0;
+			summary.total = (typeof summary.total === 'number') ? summary.total : (summary.subtotal - summary.discount + summary.shipping);
+		}
+
+		render(summary);
+
+		// proceed behavior: if you want to continue to payment page, implement navigation here
+		document.getElementById('proceedBtn').addEventListener('click', function(e){
+			e.preventDefault();
+			// collect billing details from the form area
+			const orderData = {};
+			// ...collect common fields
+			orderData.firstname = (document.getElementById('firstname') || {}).value || '';
+			orderData.lastname = (document.getElementById('lastname') || {}).value || '';
+			orderData.location = (document.getElementById('ul-checkout-country') || {}).options?.[document.getElementById('ul-checkout-country')?.selectedIndex]?.text || '';
+			orderData.address1 = (document.getElementById('address1') || {}).value || '';
+			orderData.address2 = (document.getElementById('address2') || {}).value || '';
+			orderData.city = (document.getElementById('city') || {}).value || '';
+			orderData.state = (document.getElementById('state') || {}).value || '';
+			orderData.phone = (document.getElementById('phone') || {}).value || '';
+			orderData.email = (document.getElementById('email') || {}).value || '';
+
+			// summary variable is available in this closure
+			if(!summary || !Array.isArray(summary.items) || summary.items.length === 0){
+				alert('Your cart is empty.');
+				return;
+			}
+
+			// build a saved order payload
+			const id = 'ORD-' + Date.now();
+			const items = summary.items.map((it, idx) => ({ title: it.title || ('Item ' + (idx+1)), qty: it.qty || 1, price: it.price || 0 }));
+			const total = summary.total || summary.subtotal || items.reduce((s,i)=> s + (i.price*i.qty),0);
+			orderData.id = id;
+			orderData.items = items;
+			orderData.total = total;
+			orderData.status = 'Pending';
+			orderData.createdAt = new Date().toISOString();
+
+			// save to localStorage (accumulate)
+			try{
+				const existing = JSON.parse(localStorage.getItem('orders_from_checkout') || '[]');
+				existing.push(orderData);
+				localStorage.setItem('orders_from_checkout', JSON.stringify(existing));
+			}catch(e){
+				localStorage.setItem('orders_from_checkout', JSON.stringify([orderData]));
+			}
+
+			// show thank-you message then redirect to Admin Orders page
+			alert('THANK YOU FOR TRUST IRIZA! MURAKOZE');
+			window.location.href = 'shop.html';
+		});
+	})();
+	</script>
+    <script>
+		(function(){
+			const area = document.getElementById('checkout-area');
+			const cart = IRIZA.getCart();
+			if(!cart.length){ area.innerHTML = '<div class="alert alert-info">Your cart is empty. <a href="shop.html">Shop now</a></div>'; return; }
+			const total = cart.reduce((s,i)=> s + (i.price||0)*(i.qty||0), 0);
+			area.innerHTML = `
+				<div class="row">
+					<div class="col-md-6">
+						<form id="order-form">
+							<div class="mb-3"><label>Name</label><input required class="form-control" id="cust-name"></div>
+							<div class="mb-3"><label>Phone</label><input required class="form-control" id="cust-phone"></div>
+							<div class="mb-3"><label>Address</label><input class="form-control" id="cust-address"></div>
+							<div class="mb-3"><label>Notes</label><textarea class="form-control" id="cust-notes"></textarea></div>
+							<button class="btn btn-primary">Pay & Place Order (${IRIZA.formatCurrency(total)})</button>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<h5>Order Summary</h5>
+						<ul class="list-group mb-3">${cart.map(i=>`<li class="list-group-item d-flex justify-content-between align-items-center">${i.title} x${i.qty}<span>${IRIZA.formatCurrency(i.price*i.qty)}</span></li>`).join('')}</ul>
+						<div class="fw-bold">Total: ${IRIZA.formatCurrency(total)}</div>
+					</div>
+				</div>
+			`;
+			document.getElementById('order-form').addEventListener('submit', function(e){
+				e.preventDefault();
+				const name = document.getElementById('cust-name').value.trim();
+				const phone = document.getElementById('cust-phone').value.trim();
+				const address = document.getElementById('cust-address').value.trim();
+				const notes = document.getElementById('cust-notes').value.trim();
+				const id = 'ORD-' + Date.now();
+				const payload = { id, name, phone, address, notes, items: cart, total, status:'Pending', createdAt: new Date().toISOString() };
+
+				// send to server
+				fetch('/api/orders', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+					.then(r=>{ if(!r.ok) throw new Error('Failed'); return r.json(); })
+					.then(data=>{
+						// clear cart (server accepted)
+						localStorage.setItem('iriza_cart_v1', JSON.stringify([]));
+						IRIZA.updateHeaderCount();
+						// notify configured webhooks about this new order (best-effort)
+						try { API.webhooks.sendToAllWebhooks('order.created', payload); } catch(e){ /* ignore */ }
+						location.href = 'Payment confirm.html?id=' + encodeURIComponent(data.id || id);
+					})
+					.catch(err=>{
+						console.error(err);
+						alert('Failed to place order. Your order is saved locally.');
+						// fallback: store locally
+						const orders = JSON.parse(localStorage.getItem('iriza_orders_v1')||'[]');
+						orders.push(payload);
+						localStorage.setItem('iriza_orders_v1', JSON.stringify(orders));
+						localStorage.setItem('iriza_cart_v1', JSON.stringify([]));
+						IRIZA.updateHeaderCount();
+						// notify webhooks even on local fallback (best-effort)
+						try { API.webhooks.sendToAllWebhooks('order.created', payload); } catch(e){ /* ignore */ }
+						location.href = 'Payment confirm.html?id=' + encodeURIComponent(id);
+					});
+			});
+		})();
+	</script>
+</body>
+
+</html>

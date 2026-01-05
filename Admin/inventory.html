@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Inventory - IRIZA RESTAURANT</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+<body>
+	<!-- ...existing header/nav similar to profile.html ... -->
+	<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="profile.html">IRIZA RESTAURANT</a>
+			<div class="d-flex ms-auto">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="profile.html">Back to Profile</a>
+				<a class="btn btn-primary btn-sm" href="inventory.html">Refresh</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="d-flex align-items-center justify-content-between mb-3">
+			<div>
+				<h3 class="mb-0">Inventory</h3>
+				<small class="text-muted">Track stock & suppliers</small>
+			</div>
+			<div>
+				<button class="btn btn-success" id="add-item" data-bs-toggle="modal" data-bs-target="#itemModal"><i class="fas fa-plus"></i> Add Item</button>
+				<button class="btn btn-outline-secondary" id="manage-suppliers" data-bs-toggle="modal" data-bs-target="#supplierModal">Suppliers</button>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-4">
+				<div class="card shadow-sm p-3">
+					<div class="h6">Low Stock</div>
+					<div class="display-6 text-danger" id="low-count">0</div>
+				</div>
+			</div>
+			<div class="col-md-8 text-end">
+				<button class="btn btn-outline-secondary btn-sm" id="export-inv">Export CSV</button>
+			</div>
+		</div>
+
+		<div class="card shadow">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" id="inventory-table">
+						<thead class="table-light">
+							<tr><th>Item</th><th>Qty</th><th>Unit</th><th>Reorder</th><th>Supplier</th><th class="text-end">Actions</th></tr>
+						</thead>
+						<tbody id="inv-tbody"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Item Modal -->
+	<div class="modal fade" id="itemModal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header"><h5 class="modal-title">Add Inventory Item</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+				<form id="item-form" onsubmit="return false;">
+					<div class="modal-body">
+						<input type="hidden" id="item-id">
+						<div class="mb-3"><label class="form-label">Name</label><input class="form-control" id="item-name" required></div>
+						<div class="mb-3 row">
+							<div class="col"><label class="form-label">Qty</label><input class="form-control" id="item-qty" type="number" min="0" value="0"></div>
+							<div class="col"><label class="form-label">Unit</label><input class="form-control" id="item-unit" placeholder="kg, pcs"></div>
+						</div>
+						<div class="mb-3"><label class="form-label">Reorder level</label><input class="form-control" id="item-reorder" type="number" value="5"></div>
+						<div class="mb-3"><label class="form-label">Supplier</label><input class="form-control" id="item-supplier" placeholder="Supplier name"></div>
+					</div>
+					<div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary btn-sm" id="save-item">Save</button></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Supplier Modal -->
+	<div class="modal fade" id="supplierModal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header"><h5 class="modal-title">Suppliers</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<div class="d-flex gap-2 mb-2">
+							<input class="form-control" id="new-supplier" placeholder="Supplier name">
+							<button class="btn btn-primary btn-sm" id="add-supplier">Add</button>
+						</div>
+					</div>
+					<ul class="list-group" id="supplier-list"></ul>
+				</div>
+				<div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		(function(){
+			var suppliers = ['Kigali Foods Ltd', 'Fresh Farms'];
+			var items = [
+				{ id:1, name:'Rice', qty:20, unit:'kg', reorder:10, supplier:'Kigali Foods Ltd' },
+				{ id:2, name:'Tomatoes', qty:3, unit:'kg', reorder:10, supplier:'Fresh Farms' }
+			];
+
+			function renderSuppliers(){
+				var $l = $('#supplier-list').empty();
+				suppliers.forEach(function(s,i){
+					$l.append('<li class="list-group-item d-flex justify-content-between align-items-center">'+s+'<button class="btn btn-sm btn-outline-danger remove-supplier" data-i="'+i+'">Remove</button></li>');
+				});
+			}
+
+			function renderItems(){
+				var $t = $('#inv-tbody').empty();
+				items.forEach(function(it){
+					var low = it.qty <= it.reorder ? 'text-danger' : '';
+					$t.append('<tr data-id="'+it.id+'"><td>'+it.name+'</td><td class="'+low+'">'+it.qty+'</td><td>'+it.unit+'</td><td>'+it.reorder+'</td><td>'+ (it.supplier||'-') +'</td><td class="text-end"><button class="btn btn-sm btn-outline-primary edit-item">Edit</button><button class="btn btn-sm btn-outline-danger remove-item">Remove</button></td></tr>');
+				});
+				$('#low-count').text(items.filter(x=>x.qty<=x.reorder).length);
+			}
+
+			renderSuppliers(); renderItems();
+
+			$('#add-supplier').on('click', function(){
+				var v = $('#new-supplier').val().trim();
+				if (!v) return $('#new-supplier').focus();
+				suppliers.push(v); $('#new-supplier').val(''); renderSuppliers();
+			});
+			$(document).on('click', '.remove-supplier', function(){ suppliers.splice(parseInt($(this).data('i'),10),1); renderSuppliers(); });
+
+			$('#add-item').on('click', function(){ $('#item-form')[0].reset(); $('#item-id').val(''); });
+			$('#save-item').on('click', function(){
+				var id = parseInt($('#item-id').val(),10);
+				var name = $('#item-name').val().trim(); if (!name) return $('#item-name').focus();
+				var qty = parseFloat($('#item-qty').val()) || 0;
+				var unit = $('#item-unit').val().trim();
+				var reorder = parseFloat($('#item-reorder').val()) || 0;
+				var supplier = $('#item-supplier').val().trim();
+				if (id) {
+					var it = items.find(x=>x.id===id); if (it) { it.name=name; it.qty=qty; it.unit=unit; it.reorder=reorder; it.supplier=supplier; }
+				} else {
+					var nid = items.length?Math.max.apply(null,items.map(x=>x.id))+1:1;
+					items.push({ id:nid, name:name, qty:qty, unit:unit, reorder:reorder, supplier:supplier });
+				}
+				$('#itemModal').modal('hide'); renderItems();
+			});
+
+			$(document).on('click', '.edit-item', function(){
+				var id = $(this).closest('tr').data('id'), it = items.find(x=>x.id===id);
+				if (!it) return;
+				$('#item-id').val(it.id);
+				$('#item-name').val(it.name);
+				$('#item-qty').val(it.qty);
+				$('#item-unit').val(it.unit);
+				$('#item-reorder').val(it.reorder);
+				$('#item-supplier').val(it.supplier);
+				new bootstrap.Modal($('#itemModal')).show();
+			});
+			$(document).on('click', '.remove-item', function(){ var id=$(this).closest('tr').data('id'); items=items.filter(x=>x.id!==id); renderItems(); });
+
+			$('#export-inv').on('click', function(){
+				var csv = 'Name,Qty,Unit,Reorder,Supplier\n' + items.map(i=> [i.name,i.qty,i.unit,i.reorder,i.supplier].join(',')).join('\n');
+				var blob = new Blob([csv], {type:'text/csv'}); var url = URL.createObjectURL(blob);
+				var a = document.createElement('a'); a.href=url; a.download='inventory.csv'; a.click(); URL.revokeObjectURL(url);
+			});
+		})();
+	</script>
+</body>
+</html>

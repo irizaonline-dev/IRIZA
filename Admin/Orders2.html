@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>ADMIN-ORDER</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+	<link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+					<div class="container-fluid">
+						<button class="btn btn-link d-md-none me-3 rounded-circle" id="sidebarToggleTop" type="button"><i
+								class="fas fa-bars"></i></button>
+						<form class="d-none d-sm-inline-block mw-100 ms-md-3 me-auto my-2 my-md-0 navbar-search">
+							<div class="input-group">
+								<input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+								<button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button>
+							</div>
+						</form>
+						<ul class="navbar-nav flex-nowrap ms-auto">
+							<li class="nav-item dropdown d-sm-none no-arrow">
+								<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i
+										class="fas fa-search"></i></a>
+								<div class="dropdown-menu p-3 dropdown-menu-end animated--grow-in" aria-labelledby="searchDropdown">
+									<form class="w-100 me-auto navbar-search">
+										<div class="input-group">
+											<input class="bg-light border-0 form-control small" type="text" placeholder="Search for ...">
+											<button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+										</div>
+									</form>
+								</div>
+							</li>
+							<li class="nav-item mx-1 dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+											class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+									<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+										<h6 class="dropdown-header">alerts center</h6>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3">
+												<div class="bg-primary icon-circle">
+													<i class="fas fa-file-alt text-white"></i>
+												</div>
+											</div>
+											<div>
+												<span class="small text-gray-500">December 12, 2019</span>
+												<p>A new monthly report is ready to download!</p>
+											</div>
+										</a>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3">
+												<div class="bg-success icon-circle">
+													<i class="fas fa-donate text-white"></i>
+												</div>
+											</div>
+											<div>
+												<span class="small text-gray-500">December 7, 2019</span>
+												<p>$290.29 has been deposited into your account!</p>
+											</div>
+										</a>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3">
+												<div class="bg-warning icon-circle">
+													<i class="fas fa-exclamation-triangle text-white"></i>
+												</div>
+											</div>
+											<div>
+												<span class="small text-gray-500">December 2, 2019</span>
+												<p>Spending Alert: We've noticed unusually high spending for your account.</p>
+											</div>
+										</a>
+										<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+									</div>
+								</div>
+							</li>
+							<li class="nav-item mx-1 dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+											class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
+									<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+										<h6 class="dropdown-header">alerts center</h6>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3 dropdown-list-image">
+												<img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
+												<div class="bg-success status-indicator"></div>
+											</div>
+											<div class="fw-bold">
+												<div class="text-truncate">
+													<span>Hi there! I am wondering if you can help me with a problem I've been having.</span>
+												</div>
+												<p class="mb-0 small text-gray-500">Emily Fowler - 58m</p>
+											</div>
+										</a>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3 dropdown-list-image">
+												<img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg">
+												<div class="status-indicator"></div>
+											</div>
+											<div class="fw-bold">
+												<div class="text-truncate">
+													<span>I have the photos that you ordered last month!</span>
+												</div>
+												<p class="mb-0 small text-gray-500">Jae Chun - 1d</p>
+											</div>
+										</a>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3 dropdown-list-image">
+												<img class="rounded-circle" src="assets/img/avatars/avatar3.jpeg">
+												<div class="bg-warning status-indicator"></div>
+											</div>
+											<div class="fw-bold">
+												<div class="text-truncate">
+													<span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span>
+												</div>
+												<p class="mb-0 small text-gray-500">Morgan Alvarez - 2d</p>
+											</div>
+										</a>
+										<a class="dropdown-item d-flex align-items-center" href="#">
+											<div class="me-3 dropdown-list-image">
+												<img class="rounded-circle" src="assets/img/avatars/avatar5.jpeg">
+												<div class="bg-success status-indicator"></div>
+											</div>
+											<div class="fw-bold">
+												<div class="text-truncate">
+													<span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span>
+												</div>
+												<p class="mb-0 small text-gray-500">Chicken the Dog · 2w</p>
+											</div>
+										</a>
+										<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+									</div>
+								</div>
+							</li>
+							<div class="d-none d-sm-block topbar-divider"></div>
+							<li class="nav-item dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+											class="d-none d-lg-inline me-2 text-gray-600 small">MBABAZI Joseph</span><img
+											class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+										<a class="dropdown-item" href="#"><i
+												class="fas fa-user me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Profile</a>
+										<a class="dropdown-item" href="#"><i
+												class="fas fa-cogs me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Settings</a>
+										<a class="dropdown-item" href="#"><i
+												class="fas fa-list me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Activity log</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#"><i
+												class="fas fa-sign-out-alt me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Logout</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="container-fluid">
+					<h3 class="text-dark mb-4">#IRIZA GRILL 02015</h3>
+					<div class="card shadow">
+						<div class="card-header py-3 d-flex align-items-center justify-content-between">
+							<p class="text-primary m-0 fw-bold">ALL ORDERS</p>
+							<button id="add-order-btn" class="btn btn-sm btn-success">+ Add Order</button>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6 text-nowrap">
+									<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+										<label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+											<option value="10" selected="">10</option>
+											<option value="25">25</option>
+											<option value="50">50</option>
+											<option value="100">100</option>
+										</select>&nbsp;</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="text-md-end dataTables_filter" id="dataTable_filter">
+										<label class="form-label"><input type="search" class="form-control form-control-sm"
+												aria-controls="dataTable" placeholder="Search"></label>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive mt-2" id="dataTableWrapper" role="grid" aria-describedby="dataTable_info">
+								<table class="table my-0" id="ordersTable">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Product/ID</th>
+											<th>Location</th>
+											<th>Mobile</th>
+											<th>E-mail</th>
+											<th>Quantity</th>
+											<th>Amount</th>
+											<th>Total</th>
+											<th>Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody id="orders-tbody"></tbody>
+									<tfoot>
+										<tr>
+											<td><strong>Name</strong></td>
+											<td><strong>Product</strong></td>
+											<td><strong>Location</strong></td>
+											<td><strong>Mobile</strong></td>
+											<td><strong>E-mail</strong></td>
+											<td><strong>Quantity</strong></td>
+											<td><strong>Amount</strong></td>
+											<td><strong>TOTAL</strong></td>
+											<td><strong>Status</strong></td>
+											<td><strong>Actions</strong></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+
+							<!-- Row template for rendering orders -->
+							<template id="order-row-template">
+								<tr>
+									<td class="align-middle">
+										<div class="d-flex align-items-center">
+											<img src="" alt="avatar" class="rounded-circle me-2" width="36" height="36">
+											<div>
+												<div class="order-name fw-bold"></div>
+												<div class="small text-muted order-sub"></div>
+											</div>
+										</div>
+									</td>
+									<td class="product-cell align-middle"></td>
+									<td class="location-cell align-middle"></td>
+									<td class="mobile-cell align-middle"></td>
+									<td class="email-cell align-middle"></td>
+									<td class="qty-cell align-middle"></td>
+									<td class="amount-cell align-middle"></td>
+									<td class="total-value align-middle"></td>
+									<td class="status-cell align-middle"><span class="badge bg-secondary status-badge">Pending</span>
+									</td>
+									<td class="align-middle">
+										<div class="btn-group btn-group-sm" role="group" aria-label="actions">
+											<button class="btn btn-outline-primary view-btn" title="View / Edit"><i
+												class="fas fa-eye"></i></button>
+											<button class="btn btn-outline-success approve-btn" title="Approve"><i
+												class="fas fa-check"></i></button>
+											<button class="btn btn-outline-danger deny-btn" title="Deny"><i
+												class="fas fa-times"></i></button>
+											<button class="btn btn-outline-secondary share-btn" title="Share"><i
+												class="fas fa-share-alt"></i></button>
+											<button class="btn btn-outline-warning delete-btn" title="Delete"><i
+												class="fas fa-trash"></i></button>
+										</div>
+									</td>
+								</tr>
+							</template>
+
+							<!-- Details / Edit Modal -->
+							<div class="modal fade" id="order-modal" tabindex="-1" aria-labelledby="orderModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<form id="order-form">
+											<div class="modal-body">
+												<input type="hidden" id="order-id">
+												<div class="mb-3 text-center">
+													<img id="order-avatar" src="" alt="avatar" class="rounded-circle"
+														width="72" height="72">
+												</div>
+												<div class="mb-3">
+													<label class="form-label">Customer name</label>
+													<input id="order-name" class="form-control" required>
+												</div>
+												<div class="mb-3">
+													<label class="form-label">Product / ID</label>
+													<input id="order-product" class="form-control" required>
+												</div>
+												<div class="mb-3">
+													<label class="form-label">Location</label>
+													<input id="order-location" class="form-control">
+												</div>
+												<!-- added mobile & email fields -->
+												<div class="row">
+													<div class="col-6 mb-3">
+														<label class="form-label">Mobile</label>
+														<input id="order-mobile" class="form-control" placeholder="e.g. +2507xxxxxxx">
+													</div>
+													<div class="col-6 mb-3">
+														<label class="form-label">E-mail</label>
+														<input id="order-email" type="email" class="form-control" placeholder="customer@example.com">
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6 mb-3">
+														<label class="form-label">Quantity</label>
+														<input id="order-qty" type="number" min="0" class="form-control">
+													</div>
+													<div class="col-6 mb-3">
+														<label class="form-label">Amount</label>
+														<input id="order-amount" type="number" min="0" step="0.01"
+															class="form-control">
+													</div>
+												</div>
+												<div class="mb-3">
+													<label class="form-label">Status</label>
+													<select id="order-status" class="form-select">
+														<option>Pending</option>
+														<option>Approved</option>
+														<option>Denied</option>
+													</select>
+												</div>
+												<div class="mb-0 small text-muted" id="order-meta"></div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+												</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6 align-self-center">
+									<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of
+										27</p>
+								</div>
+								<div class="col-md-6">
+									<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+										<ul class="pagination">
+											<li class="page-item disabled">
+												<a class="page-link" aria-label="Previous" href="#"><span
+													aria-hidden="true">«</span></a>
+											</li>
+											<li class="page-item active"><a class="page-link" href="#">1</a></li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item">
+												<a class="page-link" aria-label="Next" href="#"><span
+													aria-hidden="true">»</span></a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer class="bg-white sticky-footer">
+					<div class="container my-auto">
+						<div class="text-center my-auto copyright"></div>
+					</div>
+				</footer>
+			</div>
+			<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+		</div>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="assets/js/script.min.js"></script>
+		<script>
+			(function () {
+				// sample orders - edit this array for bulk changes
+				let orders = [
+					{ id: 1, name: "MUHIRE Kevin", avatar: "assets/img/avatars/avatar1.jpeg", product: "#A001", location: "Remera", mobile: "+250788000001", email: "kevin@example.com", qty: 2, amount: 4000, status: "Pending", createdAt: "2024-01-15" },
+					{ id: 2, name: "NGENZI Anaelle", avatar: "assets/img/avatars/avatar2.jpeg", product: "#A002", location: "Nyamirambo", mobile: "+250788000002", email: "anaelle@example.com", qty: 1, amount: 17000, status: "Pending", createdAt: "2024-02-01" },
+					{ id: 3, name: "DUSABIMANA Dative", avatar: "assets/img/avatars/avatar3.jpeg", product: "#A003", location: "Gatsata", mobile: "+250788000003", email: "dative@example.com", qty: 2, amount: 25000, status: "Approved", createdAt: "2024-03-05" }
+					// ...add or remove objects here for quick edits...
+				];
+
+				// storage helpers: persist orders so dashboard can consume them
+				const ORDERS_STORAGE_KEY = 'iriza_orders_master';
+				function saveOrdersToStorage(){
+					try{ localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders)); }catch(e){}
+				}
+				function loadOrdersFromStorage(){
+					try{
+						const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
+						if(!raw) return null;
+						const parsed = JSON.parse(raw);
+						if(Array.isArray(parsed)) return parsed;
+					}catch(e){}
+					return null;
+				}
+				// merge persisted orders (if any) into initial array (preserve sample defaults as fallback)
+				(function mergeStored(){
+					const stored = loadOrdersFromStorage();
+					if(Array.isArray(stored)){
+						// replace sample if stored has items
+						orders = stored.concat(orders.filter(s => !stored.find(st => String(st.id) === String(s.id))));
+					}
+				})();
+
+				// import orders created on checkout page (if any)
+				(function importCheckoutOrders(){
+					try{
+						const imported = JSON.parse(localStorage.getItem('orders_from_checkout') || '[]');
+						if(Array.isArray(imported) && imported.length){
+							imported.forEach((o, idx) => {
+								// product lines each on its own line
+								const prodList = (o.items || []).map(it => `${it.title} x${it.qty}`).join('<br>');
+								const newOrder = {
+									id: o.id || ('C' + Date.now() + idx),
+									// show client name in main line, order id in subtitle
+									name: ((o.firstname || '') + ' ' + (o.lastname || '')).trim() || (o.name || 'Customer'),
+									avatar: 'assets/img/avatars/avatar1.jpeg',
+									product: prodList || 'Items',
+									// take Location from checkout payload (ul-checkout-country text)
+									location: o.location || '',
+									mobile: o.phone || '',
+									email: o.email || '',
+									qty: 1,
+									amount: o.total || 0,
+									status: o.status || 'Pending',
+									createdAt: o.createdAt ? o.createdAt.slice(0,10) : (new Date()).toISOString().slice(0,10)
+								};
+								orders.push(newOrder);
+							});
+
+							// show thank-you banner at top of table area
+							const cardBody = document.querySelector('.card-body');
+							if(cardBody){
+								const banner = document.createElement('div');
+								banner.className = 'alert alert-success';
+								banner.textContent = 'THANK YOU FOR TRUST IRIZA! MURAKOZE';
+								cardBody.insertBefore(banner, cardBody.firstChild);
+								setTimeout(()=> banner.remove(), 6000);
+							}
+							// persist newly imported orders and remove temp key
+							saveOrdersToStorage();
+							localStorage.removeItem('orders_from_checkout');
+						}
+					}catch(e){}
+				})();
+
+				const tbody = document.getElementById('orders-tbody');
+				const template = document.getElementById('order-row-template').content;
+				const modalEl = document.getElementById('order-modal');
+				const bsModal = new bootstrap.Modal(modalEl);
+
+				function formatCurrency(n) {
+					return new Intl.NumberFormat().format(n) + ' FRW';
+				}
+
+				function statusToBadgeClass(status) {
+					if (status === 'Approved') return 'bg-success';
+					if (status === 'Denied') return 'bg-danger';
+					return 'bg-secondary';
+				}
+
+				function renderOrders() {
+					tbody.innerHTML = '';
+					orders.forEach(order => {
+						const row = document.importNode(template, true);
+						const tr = row.querySelector('tr');
+						tr.dataset.id = order.id;
+						// show client name and order id underneath
+						row.querySelector('.order-name').textContent = order.name;
+						row.querySelector('.order-sub').textContent = order.id;
+						row.querySelector('img').src = order.avatar || 'assets/img/avatars/avatar1.jpeg';
+						// product may contain <br> so use innerHTML
+						row.querySelector('.product-cell').innerHTML = order.product;
+						row.querySelector('.location-cell').textContent = order.location;
+						row.querySelector('.mobile-cell').textContent = order.mobile || '';
+						row.querySelector('.email-cell').textContent = order.email || '';
+						row.querySelector('.qty-cell').textContent = order.qty;
+						row.querySelector('.amount-cell').textContent = formatCurrency(order.amount);
+						if (typeof order.total === 'number') {
+							row.querySelector('.total-value').textContent = formatCurrency(order.total);
+						} else {
+							row.querySelector('.total-value').textContent = formatCurrency((order.qty || 0) * (order.amount || 0));
+						}
+						const badge = row.querySelector('.status-badge');
+						badge.textContent = order.status || 'Pending';
+						badge.className = 'badge ' + statusToBadgeClass(order.status) + ' status-badge';
+						tbody.appendChild(row);
+					});
+					// persist after render in case orders array changed
+					saveOrdersToStorage();
+				}
+
+				function addOrderFromPrompt() {
+					const name = prompt('Customer name:', 'New Customer');
+					if (!name) return;
+					const product = prompt('Product/ID:', 'Product / #XXXX');
+					const location = prompt('Location:', 'Unknown');
+					const mobile = prompt('Mobile (phone):', '');
+					const email = prompt('E-mail:', '');
+					const qty = parseInt(prompt('Quantity:', '1'), 10) || 1;
+					const amount = parseFloat(prompt('Amount (numeric):', '0')) || 0;
+					const id = orders.length ? (Math.max(...orders.map(o=> isNaN(Number(o.id)) ? 0 : Number(o.id))) + 1) : 1;
+					orders.push({ id, name, avatar: 'assets/img/avatars/avatar1.jpeg', product, location, mobile, email, qty, amount, status: 'Pending', createdAt: new Date().toISOString().slice(0,10) });
+					renderOrders();
+				}
+
+				function openOrderModal(id) {
+					const order = orders.find(o => o.id == id);
+					if (!order) return;
+					document.getElementById('order-id').value = order.id;
+					document.getElementById('order-avatar').src = order.avatar || 'assets/img/avatars/avatar1.jpeg';
+					document.getElementById('order-name').value = order.name;
+					document.getElementById('order-product').value = order.product;
+					document.getElementById('order-location').value = order.location;
+					document.getElementById('order-mobile').value = order.mobile || '';
+					document.getElementById('order-email').value = order.email || '';
+					document.getElementById('order-qty').value = order.qty;
+					document.getElementById('order-amount').value = order.amount;
+					document.getElementById('order-status').value = order.status || 'Pending';
+					document.getElementById('order-meta').textContent = 'Created: ' + (order.createdAt || 'N/A') + ' • ID: ' + order.id;
+					bsModal.show();
+				}
+
+				function saveOrderFromModal(e) {
+					e.preventDefault();
+					const id = parseInt(document.getElementById('order-id').value, 10);
+					const idx = orders.findIndex(o => o.id == id);
+					if (idx === -1) return;
+					const updated = {
+						...orders[idx],
+						name: document.getElementById('order-name').value,
+						product: document.getElementById('order-product').value,
+						location: document.getElementById('order-location').value,
+						mobile: document.getElementById('order-mobile').value,
+						email: document.getElementById('order-email').value,
+						qty: parseInt(document.getElementById('order-qty').value, 10) || 0,
+						amount: parseFloat(document.getElementById('order-amount').value) || 0,
+						status: document.getElementById('order-status').value
+					};
+					orders[idx] = updated;
+					bsModal.hide();
+					renderOrders();
+					// redirect to home after submit
+					window.location.href = '#';
+				}
+
+				function approveOrder(id) {
+					const idx = orders.findIndex(o => o.id == id);
+					if (idx === -1) return;
+					orders[idx].status = 'Approved';
+					renderOrders();
+				}
+
+				function denyOrder(id) {
+					const idx = orders.findIndex(o => o.id == id);
+					if (idx === -1) return;
+					orders[idx].status = 'Denied';
+					renderOrders();
+				}
+
+				function shareOrder(id) {
+					const order = orders.find(o => o.id == id);
+					if (!order) return;
+					const target = prompt('Share to (email):', '');
+					if (!target) return;
+					// minimal mock share experience
+					alert('Order #' + id + ' shared to ' + target);
+				}
+
+				function deleteOrder(id) {
+					if (!confirm('Delete this order?')) return;
+					orders = orders.filter(o => o.id != id);
+					renderOrders();
+				}
+
+				// event delegation for actions
+				tbody.addEventListener('click', function (e) {
+					const tr = e.target.closest('tr');
+					if (!tr) return;
+					const id = tr.dataset.id;
+					if (e.target.closest('.view-btn')) {
+						openOrderModal(id);
+					} else if (e.target.closest('.approve-btn')) {
+						approveOrder(id);
+					} else if (e.target.closest('.deny-btn')) {
+						denyOrder(id);
+					} else if (e.target.closest('.share-btn')) {
+						shareOrder(id);
+					} else if (e.target.closest('.delete-btn')) {
+						deleteOrder(id);
+					}
+				});
+
+				// Add order button
+				document.getElementById('add-order-btn').addEventListener('click', addOrderFromPrompt);
+
+				// modal save
+				document.getElementById('order-form').addEventListener('submit', saveOrderFromModal);
+
+				// initial render
+				document.addEventListener('DOMContentLoaded', renderOrders);
+				if (document.readyState === 'complete' || document.readyState === 'interactive') renderOrders();
+			})();
+		</script>
+
+		<!-- ...existing code... -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="assets/js/script.min.js"></script>
+	</body>
+
+</html>

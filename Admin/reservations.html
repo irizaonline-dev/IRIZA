@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reservations - IRIZA RESTAURANT</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+<body>
+	<!-- ...existing header/nav similar to profile.html ... -->
+	<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="profile.html">IRIZA RESTAURANT</a>
+			<div class="d-flex ms-auto">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="profile.html">Back to Profile</a>
+				<a class="btn btn-primary btn-sm" href="reservations.html">Refresh</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="d-flex align-items-center justify-content-between mb-3">
+			<div>
+				<h3 class="mb-0">Reservations</h3>
+				<small class="text-muted">View & manage bookings</small>
+			</div>
+			<div>
+				<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bookingModal"><i class="fas fa-plus"></i> New Booking</button>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-4">
+				<input class="form-control" id="search-bookings" placeholder="Search by name or phone">
+			</div>
+			<div class="col-md-8 text-end">
+				<button class="btn btn-outline-secondary btn-sm" id="filter-today">Today's</button>
+				<button class="btn btn-outline-secondary btn-sm" id="filter-upcoming">Upcoming</button>
+				<button class="btn btn-outline-secondary btn-sm" id="filter-all">All</button>
+			</div>
+		</div>
+
+		<div class="card shadow">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead class="table-light">
+							<tr>
+								<th>Guest</th>
+								<th>Phone</th>
+								<th>Date & Time</th>
+								<th>Guests</th>
+								<th>Status</th>
+								<th class="text-end">Actions</th>
+							</tr>
+						</thead>
+						<tbody id="bookings-tbody">
+							<!-- bookings render here -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Booking Modal -->
+	<div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header"><h5 class="modal-title">New Booking</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+				<form id="booking-form" onsubmit="return false;">
+					<div class="modal-body">
+						<input type="hidden" id="booking-id">
+						<div class="mb-3"><label class="form-label">Guest name</label><input class="form-control" id="guest-name" required></div>
+						<div class="mb-3"><label class="form-label">Phone</label><input class="form-control" id="guest-phone"></div>
+						<div class="mb-3"><label class="form-label">Date & Time</label><input class="form-control" id="guest-datetime" type="datetime-local" required></div>
+						<div class="mb-3"><label class="form-label">Guests</label><input class="form-control" id="guest-count" type="number" min="1" value="2"></div>
+						<div class="mb-3"><label class="form-label">Notes</label><textarea class="form-control" id="guest-notes" rows="3"></textarea></div>
+					</div>
+					<div class="modal-footer"><button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary btn-sm" id="save-booking">Save</button></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		(function () {
+			var bookings = [
+				{ id:1, name:'Alice Uwase', phone:'+250780001111', datetime: new Date().toISOString(), guests:2, status:'Confirmed', notes:''},
+				{ id:2, name:'Ben Nkurunziza', phone:'+250780002222', datetime: new Date(Date.now()+86400000).toISOString(), guests:4, status:'Pending', notes:'Window table' }
+			];
+
+			function render(filter) {
+				var $t = $('#bookings-tbody').empty();
+				var q = $('#search-bookings').val().toLowerCase();
+				bookings.filter(function(b){
+					if (filter === 'today') {
+						var d = new Date(b.datetime), today = new Date();
+						return d.toDateString() === today.toDateString();
+					}
+					if (filter === 'upcoming') return new Date(b.datetime) > new Date();
+					return true;
+				}).filter(function(b){
+					if (!q) return true;
+					return (b.name + ' ' + (b.phone||'') + ' ' + (b.notes||'')).toLowerCase().indexOf(q) !== -1;
+				}).forEach(function(b){
+					var row = '<tr data-id="'+b.id+'">'
+						+ '<td>'+b.name+'</td>'
+						+ '<td>'+ (b.phone||'-') +'</td>'
+						+ '<td>'+ new Date(b.datetime).toLocaleString() +'</td>'
+						+ '<td>'+ b.guests +'</td>'
+						+ '<td><span class="badge bg-'+ (b.status==='Confirmed'?'success':(b.status==='Seated'?'info':'secondary')) +'">'+ b.status +'</span></td>'
+						+ '<td class="text-end">'
+						+ '<button class="btn btn-sm btn-outline-primary edit-booking">Edit</button>'
+						+ '<button class="btn btn-sm btn-outline-success confirm-booking">Confirm</button>'
+						+ '<button class="btn btn-sm btn-outline-danger cancel-booking">Cancel</button>'
+						+ '</td></tr>';
+					$t.append(row);
+				});
+			}
+
+			render();
+
+			$('#search-bookings').on('input', function(){ render(); });
+			$('#filter-today').on('click', function(){ render('today'); });
+			$('#filter-upcoming').on('click', function(){ render('upcoming'); });
+			$('#filter-all').on('click', function(){ render(); });
+
+			$('#save-booking').on('click', function(){
+				var id = parseInt($('#booking-id').val(),10);
+				var name = $('#guest-name').val().trim();
+				if (!name) return $('#guest-name').focus();
+				var phone = $('#guest-phone').val().trim();
+				var datetime = $('#guest-datetime').val();
+				var guests = parseInt($('#guest-count').val(),10) || 1;
+				var notes = $('#guest-notes').val().trim();
+				if (id) {
+					var b = bookings.find(x=>x.id===id);
+					if (b) { b.name=name; b.phone=phone; b.datetime=datetime; b.guests=guests; b.notes=notes; }
+				} else {
+					var nid = bookings.length?Math.max.apply(null,bookings.map(x=>x.id))+1:1;
+					bookings.push({ id:nid, name:name, phone:phone, datetime:datetime, guests:guests, status:'Pending', notes:notes });
+				}
+				$('#bookingModal').modal('hide');
+				$('#booking-form')[0].reset();
+				render();
+			});
+
+			$(document).on('click', '.edit-booking', function(){
+				var id = $(this).closest('tr').data('id'), b = bookings.find(x=>x.id===id);
+				if (!b) return;
+				$('#booking-id').val(b.id);
+				$('#guest-name').val(b.name);
+				$('#guest-phone').val(b.phone);
+				$('#guest-datetime').val(new Date(b.datetime).toISOString().slice(0,16));
+				$('#guest-count').val(b.guests);
+				$('#guest-notes').val(b.notes);
+				new bootstrap.Modal($('#bookingModal')).show();
+			});
+
+			$(document).on('click', '.confirm-booking', function(){
+				var id = $(this).closest('tr').data('id'), b = bookings.find(x=>x.id===id);
+				if (b) { b.status = 'Confirmed'; render(); }
+			});
+			$(document).on('click', '.cancel-booking', function(){
+				var id = $(this).closest('tr').data('id');
+				bookings = bookings.filter(x=>x.id!==id);
+				render();
+			});
+		})();
+	</script>
+</body>
+</html>
