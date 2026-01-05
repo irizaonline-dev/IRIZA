@@ -10,8 +10,10 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+const { loginLimiter } = require('./middleware/rateLimit');
+
 // Mount routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', loginLimiter, require('./routes/auth'));
 app.use('/api/menu', require('./routes/menu'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/webhooks', require('./routes/webhooks'));
