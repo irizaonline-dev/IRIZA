@@ -19,6 +19,8 @@ app.use('/api/auth', loginLimiter, require('./routes/auth'));
 app.use('/api/menu', require('./routes/menu'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/webhooks', require('./routes/webhooks'));
+app.use('/api/reservations', require('./routes/reservations'));
+app.use('/api/checkout', require('./routes/checkout'));
 // Protected admin proxy: serves files from Admin/ after auth
 app.use('/api/admin', require('./routes/adminProxy'));
 

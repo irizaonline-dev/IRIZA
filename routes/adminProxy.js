@@ -13,7 +13,7 @@ router.get('/*', auth('admin'), (req, res) => {
   try {
     const p = req.query.path || req.params[0] || '';
     // normalize and prevent path traversal
-    const safe = path.normalize(p).replace(/^\.+\/,'');
+    const safe = path.normalize(p).replace(/^\.+\//, '');
     const filePath = path.join(process.cwd(), 'Admin', safe);
     if (!filePath.startsWith(path.join(process.cwd(), 'Admin'))) {
       return res.status(400).send('Invalid path');

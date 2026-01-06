@@ -3,8 +3,23 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 let mongod;
 
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+async function createWithRetries(attempts = 5, delay = 3000) {
+  let lastErr;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await MongoMemoryServer.create();
+    } catch (err) {
+      lastErr = err;
+      if (i < attempts - 1) await wait(delay);
+    }
+  }
+  throw lastErr;
+}
+
 beforeAll(async () => {
-  mongod = await MongoMemoryServer.create();
+  mongod = await createWithRetries(6, 5000);
   process.env.MONGO_URI = mongod.getUri();
   // connect using app's helper
   const connectDB = require('../config/db');
