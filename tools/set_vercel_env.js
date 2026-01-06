@@ -60,13 +60,36 @@ async function main() {
     { key: 'JWT_SECRET', value: jwtSecret, target: ['production'] }
   ];
 
+  // Fetch existing env vars for the project so we can update if present
+  const listResp = await apiRequest(`https://api.vercel.com/v9/projects/${projectId}/env`, 'GET', token);
+  let existing = [];
+  if (listResp.status === 200 && listResp.body) {
+    if (Array.isArray(listResp.body)) existing = listResp.body;
+    else if (Array.isArray(listResp.body.envs)) existing = listResp.body.envs;
+    else if (Array.isArray(listResp.body.env)) existing = listResp.body.env;
+  }
+
   for (const v of vars) {
-    console.log('Setting', v.key);
-    const p = `https://api.vercel.com/v9/projects/${projectId}/env`;
-    // Vercel API requires a `type` field when creating env vars. Use `encrypted` for secure storage.
-    const resp = await apiRequest(p, 'POST', token, { key: v.key, value: v.value, target: v.target, type: 'encrypted' });
-    if (resp.status >= 200 && resp.status < 300) console.log('OK', v.key);
-    else console.error('Failed', v.key, resp.status, resp.body);
+    try {
+      console.log('Setting', v.key);
+      // Look for an existing env var with same key and overlapping target
+      const found = existing.find(e => e.key === v.key && Array.isArray(e.target) && e.target.includes('production'));
+      if (found && found.id) {
+        // Update (PATCH) the existing env var
+        const p = `https://api.vercel.com/v9/projects/${projectId}/env/${found.id}`;
+        const resp = await apiRequest(p, 'PATCH', token, { value: v.value, target: v.target, type: 'encrypted' });
+        if (resp.status >= 200 && resp.status < 300) console.log('Updated', v.key);
+        else console.error('Failed to update', v.key, resp.status, resp.body);
+      } else {
+        // Create new env var
+        const p = `https://api.vercel.com/v9/projects/${projectId}/env`;
+        const resp = await apiRequest(p, 'POST', token, { key: v.key, value: v.value, target: v.target, type: 'encrypted' });
+        if (resp.status >= 200 && resp.status < 300) console.log('Created', v.key);
+        else console.error('Failed to create', v.key, resp.status, resp.body);
+      }
+    } catch (err) {
+      console.error('Error setting', v.key, err);
+    }
   }
 
   console.log('Done. JWT_SECRET value (hidden) saved to Vercel.');
