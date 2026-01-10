@@ -362,7 +362,7 @@
             try {
                 const name = (first + ' ' + last).trim();
                 const reg = await fetch('/api/auth/register', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email.trim().toLowerCase(), password, name, role: 'client' })
                 });
                 if (!reg.ok) {
@@ -372,7 +372,7 @@
                 }
                 // Auto-login after successful registration
                 const login = await fetch('/api/auth/login', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email.trim().toLowerCase(), password })
                 });
                 if (login.ok) {

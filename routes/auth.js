@@ -6,11 +6,13 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 function createAccessToken(user) {
-  return jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET || 'changeme', { expiresIn: '1h' });
+  const expiresIn = process.env.JWT_EXPIRES || '1h';
+  return jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET || 'changeme', { expiresIn });
 }
 
 function createRefreshToken(user) {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'changeme', { expiresIn: '7d' });
+  const expiresIn = process.env.REFRESH_EXPIRES || '7d';
+  return jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'changeme', { expiresIn });
 }
 
 // POST /api/auth/register
@@ -22,12 +24,22 @@ router.post('/register',
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
     try {
       const { email, password, name, role } = req.body;
-      const existing = await User.findOne({ email });
+      // Normalize email for consistent lookups/storage
+      const normalizedEmail = (email || '').toLowerCase().trim();
+      const existing = await User.findOne({ email: normalizedEmail });
       if (existing) return res.status(400).json({ message: 'Email already registered' });
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);
-      const user = new User({ email, passwordHash: hash, name, role });
-      await user.save();
+      const user = new User({ email: normalizedEmail, passwordHash: hash, name, role });
+      try {
+        await user.save();
+      } catch (saveErr) {
+        // Handle duplicate key race condition
+        if (saveErr && saveErr.code === 11000) {
+          return res.status(400).json({ message: 'Email already registered' });
+        }
+        throw saveErr;
+      }
       // create tokens and set refresh cookie like login
       const token = createAccessToken(user);
       const refreshToken = createRefreshToken(user);

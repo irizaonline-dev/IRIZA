@@ -8,7 +8,14 @@ const app = express();
 
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(cors());
+// Allow cross-origin credentials (cookies). Set `CORS_ORIGIN` to a comma-separated list
+// or leave unset to reflect request origin.
+const corsOptions = {
+	origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : true,
+	credentials: true,
+	exposedHeaders: ['Content-Type']
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
