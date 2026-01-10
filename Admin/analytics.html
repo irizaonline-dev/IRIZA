@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Analytics - IRIZA RESTAURANT</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<style>.chart-card { height: 320px; }</style>
+
+
+	<link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" sizes="171x74" href="assets/img/icon.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+
+</head>
+<body>
+	<!-- ...existing header/nav similar to profile.html ... -->
+	<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="profile.html">IRIZA RESTAURANT</a>
+			<div class="d-flex ms-auto">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="profile.html">Back to Profile</a>
+				<a class="btn btn-primary btn-sm" href="analytics.html">Refresh</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="d-flex align-items-center justify-content-between mb-3">
+			<div>
+				<h3 class="mb-0">Analytics</h3>
+				<small class="text-muted">Sales & performance insights</small>
+			</div>
+			<div>
+				<select class="form-select form-select-sm" id="period-select" style="width:150px;">
+					<option value="30">Last 30 days</option>
+					<option value="90">Last 90 days</option>
+					<option value="365">Last year</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3"><div class="small text-muted">Revenue (30d)</div><div class="h4" id="rev">0 FRW</div></div>
+			</div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3"><div class="small text-muted">Orders</div><div class="h4" id="orders-count">0</div></div>
+			</div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3"><div class="small text-muted">Avg Order</div><div class="h4" id="avg-order">0 FRW</div></div>
+			</div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3"><div class="small text-muted">Top Dish</div><div class="h4" id="top-dish">-</div></div>
+			</div>
+		</div>
+
+		<div class="card shadow chart-card mb-5">
+			<div class="card-body">
+				<canvas id="salesChart"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		(function(){
+			// helpers to load shared data
+			function loadJSON(key, fallback){ try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; } }
+			function formatCurrency(n){ return new Intl.NumberFormat().format(n) + ' FRW'; }
+
+			// build daily sales from orders array (orders should have createdAt YYYY-MM-DD and qty, amount)
+			function dailyTotals(orders, days){
+				const map = {};
+				for(let i=0;i<days;i++){ const d = new Date(); d.setDate(d.getDate()-i); map[d.toISOString().slice(0,10)] = 0; }
+				orders.forEach(o => {
+					const date = o.createdAt ? o.createdAt.slice(0,10) : (new Date()).toISOString().slice(0,10);
+					const v = (o.qty||0)*(o.amount||0);
+					if(date in map) map[date] += v;
+				});
+				const labels = Object.keys(map).sort();
+				return { labels: labels, data: labels.map(l => map[l]) };
+			}
+
+			var ctx = document.getElementById('salesChart').getContext('2d');
+
+			// load orders and menu from localStorage
+			var orders = loadJSON('iriza_orders', []);
+			var menu = loadJSON('iriza_menu', []);
+
+			// fallback if no orders: generate sample random (keeps UI working)
+			function sampleData(days){
+				var labels = [], data = [], total = 0, ordersCount = 0;
+				for (var i=days-1;i>=0;i--){
+					var d = new Date(); d.setDate(d.getDate()-i);
+					labels.push(d.toLocaleDateString());
+					var sales = Math.round(10000 + Math.random()*40000);
+					data.push(sales); total += sales; ordersCount += Math.round(5 + Math.random()*20);
+				}
+				return { labels: labels, data: data, total: total, orders: ordersCount };
+			}
+
+			// initialize chart with placeholder
+			var init = orders.length ? dailyTotals(orders,30) : sampleData(30);
+			var chart = new Chart(ctx, {
+				type: 'line',
+				data: { labels: init.labels, datasets: [{ label: 'Daily Sales (FRW)', data: init.data, borderColor:'#007bff', backgroundColor:'rgba(0,123,255,0.08)', tension:0.2, fill:true }] },
+				options: { responsive:true, scales:{ y:{ beginAtZero:true } } }
+			});
+
+			function update(days){
+				// if orders exist use them
+				if(orders && orders.length){
+					const dt = dailyTotals(orders, days);
+					chart.data.labels = dt.labels.map(d => new Date(d).toLocaleDateString());
+					chart.data.datasets[0].data = dt.data;
+					chart.update();
+
+					const total = orders.reduce((s,o)=> s + ((o.qty||0)*(o.amount||0)), 0);
+					const ordersCount = orders.length;
+					$('#rev').text(formatCurrency(total));
+					$('#orders-count').text(ordersCount);
+					$('#avg-order').text(ordersCount ? formatCurrency(Math.round(total / ordersCount)) : formatCurrency(0));
+					// top dish: most frequent product
+					const freq = {};
+					orders.forEach(o=> { const p=o.product||'-'; freq[p]=(freq[p]||0)+ (o.qty||1); });
+					const top = Object.keys(freq).sort((a,b)=> freq[b]-freq[a])[0] || '-';
+					$('#top-dish').text(top);
+				} else {
+					const s = sampleData(days);
+					chart.data.labels = s.labels; chart.data.datasets[0].data = s.data; chart.update();
+					$('#rev').text(s.total.toLocaleString() + ' FRW');
+					$('#orders-count').text(s.orders);
+					$('#avg-order').text(Math.round(s.total / Math.max(1,s.orders)).toLocaleString() + ' FRW');
+					$('#top-dish').text(['Grilled Tilapia','Rwandan Brochette','Avocado Salad'][Math.floor(Math.random()*3)]);
+				}
+
+				// update avg price using menu if available
+				if(menu && menu.length){
+					const avgPrice = Math.round(menu.reduce((s,x)=> s + Number(x.price||0),0) / Math.max(1, menu.length));
+					// optionally display somewhere else; updating avg-order display if no numeric change needed
+					// Keep #avg-price element if present (some pages have it)
+					$('#avg-price').text(avgPrice.toLocaleString() + ' FRW');
+				}
+			}
+
+			$('#period-select').on('change', function(){ update(parseInt(this.value,10)); });
+			update(30);
+		})();
+	</script>
+</body>
+</html>

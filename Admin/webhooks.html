@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Webhooks Admin — IRIZA</title>
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+  <style>
+    body{background:#f7f9fb}
+    .card{margin-top:20px}
+    .small-muted{color:#6c757d;font-size:.9rem}
+    .tag{display:inline-block;padding:.2rem .45rem;border-radius:12px;background:#eef; margin-right:.25rem; font-size:.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between mt-4">
+      <div>
+        <h3 class="mb-0">Webhooks</h3>
+        <div class="small-muted">Create / delete webhook endpoints (server-side persistence required)</div>
+      </div>
+      <div>
+        <a href="Darshboard.html" class="btn btn-outline-secondary btn-sm">Back</a>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form id="add-form" class="row g-2 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label">Webhook URL</label>
+            <input id="wh-url" class="form-control" placeholder="https://example.com/webhook" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Events (comma separated)</label>
+            <input id="wh-events" class="form-control" placeholder="order.created,reservation.created,contact.message">
+            <div class="form-text">Leave empty to receive all events.</div>
+          </div>
+          <div class="col-md-2">
+            <button id="btn-add" class="btn btn-primary w-100">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="mb-3">Configured Webhooks</h5>
+        <div id="alerts"></div>
+        <div class="table-responsive">
+          <table class="table table-sm" id="wh-table">
+            <thead class="table-light">
+              <tr><th>Id</th><th>URL</th><th>Events</th><th class="text-end">Actions</th></tr>
+            </thead>
+            <tbody id="wh-body">
+              <!-- rows rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+        <div class="small-muted">Note: create/delete will only persist if your server implements /api/webhooks. Otherwise this page can list configured webhooks from db.json (read-only).</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/api-client.js"></script>
+  <script src="../assets/js/webhooks-admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Add Menu - IRIZA RESTAURANT</title>
+	<link rel="icon" href="assets/img/icon.png">
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<style>
+		.card-summary { min-height: 90px; }
+		.table-actions .btn { margin-left: .25rem; }
+	</style>
+</head>
+<body>
+	<!-- ...existing header/nav similar to profile.html (use same layout) ... -->
+	<nav class="navbar navbar-expand bg-white shadow mb-4 topbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="profile.html">IRIZA RESTAURANT</a>
+			<div class="d-flex ms-auto">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="profile.html">Back to Profile</a>
+				<a class="btn btn-primary btn-sm" href="inventory.html">Inventory</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="d-flex align-items-center justify-content-between mb-3">
+			<div>
+				<h3 class="mb-0">Menu Management</h3>
+				<small class="text-muted">Edit dishes, prices & availability</small>
+			</div>
+			<div>
+				<button class="btn btn-success" id="add-dish-btn" data-bs-toggle="modal" data-bs-target="#dishModal"><i class="fas fa-plus"></i> Add Dish</button>
+				<a class="btn btn-outline-secondary" href="menu.html" id="refresh-menu">Refresh</a>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-4">
+				<div class="card card-summary shadow-sm p-3">
+					<div class="h6">Total Dishes</div>
+					<div class="display-6" id="menu-count">0</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card card-summary shadow-sm p-3">
+					<div class="h6">Available</div>
+					<div class="display-6 text-success" id="available-count">0</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card card-summary shadow-sm p-3">
+					<div class="h6">Avg. Price</div>
+					<div class="display-6" id="avg-price">0</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card shadow mb-5">
+			<div class="card-header d-flex align-items-center justify-content-between">
+				<strong>Menu</strong>
+				<small class="text-muted">Manage menu items</small>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" id="menu-table">
+						<thead class="table-light">
+							<tr>
+								<th>Dish</th>
+								<th>Category</th>
+								<th>Price (FRW)</th>
+								<th>Availability</th>
+								<th class="text-end">Actions</th>
+							</tr>
+						</thead>
+						<tbody id="menu-tbody">
+							<!-- items render here -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Dish Modal -->
+	<div class="modal fade" id="dishModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="dishModalLabel">Add Dish</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<form id="dish-form" onsubmit="return false;">
+					<div class="modal-body">
+						<input type="hidden" id="dish-id">
+						<div class="mb-3">
+							<label class="form-label">Dish name</label>
+							<input class="form-control" id="dish-name" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Description</label>
+							<textarea class="form-control" id="dish-desc" rows="3" placeholder="Short description"></textarea>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Category</label>
+							<input class="form-control" id="dish-category" placeholder="e.g. Main, Starter, Dessert">
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Price (FRW)</label>
+							<input type="number" class="form-control" id="dish-price" min="0" required>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Image (optional)</label>
+							<input type="file" accept="image/*" class="form-control" id="dish-image">
+							<div class="mt-2">
+								<img id="dish-image-preview" src="" alt="preview" style="max-width:120px;display:none;border-radius:6px;border:1px solid #eaeaea" />
+							</div>
+						</div>
+
+						<!-- NEW: Delivery options -->
+						<div class="mb-3">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="dish-deliverable" checked>
+								<label class="form-check-label" for="dish-deliverable">Available for delivery</label>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Delivery fee (FRW)</label>
+							<input type="number" class="form-control" id="dish-delivery-fee" min="0" value="0">
+						</div>
+
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" id="dish-available" checked>
+							<label class="form-check-label" for="dish-available">Available</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary btn-sm" id="save-dish">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- scripts -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		(function () {
+			// load from localStorage if present
+			var storageKey = 'iriza_menu';
+			var dishes = [];
+
+			function loadFromStorage(){
+				try{
+					var raw = localStorage.getItem(storageKey);
+					if(raw) dishes = JSON.parse(raw);
+					else dishes = [
+						{ id: 1, name: 'Grilled Tilapia', category: 'Main', price: 4500, available: true, deliverable: true, deliveryFee: 500, desc: '', img: '' },
+						{ id: 2, name: 'Rwandan Brochette', category: 'Main', price: 3500, available: true, deliverable: true, deliveryFee: 400, desc: '', img: '' },
+						{ id: 3, name: 'Fresh Avocado Salad', category: 'Starter', price: 1800, available: false, deliverable: false, deliveryFee: 0, desc: '', img: '' }
+					];
+				}catch(e){ dishes = []; }
+			}
+
+			function saveToStorage(){
+				try{ localStorage.setItem(storageKey, JSON.stringify(dishes)); }catch(e){}
+			}
+
+			function render() {
+				var $t = $('#menu-tbody').empty();
+				dishes.forEach(function (d) {
+					var avail = d.available ? '<span class="badge bg-success">Available</span>' : '<span class="badge bg-secondary">Unavailable</span>';
+					var deliveryInfo = d.deliverable ? '<div class="small text-success">Delivery: ' + (Number(d.deliveryFee||0)).toLocaleString() + ' FRW</div>' : '<div class="small text-muted">No delivery</div>';
+					var row = '<tr data-id="' + d.id + '">'
+						+ '<td><div class="d-flex align-items-center"><div style="width:56px;height:56px;overflow:hidden;border-radius:6px;margin-right:8px">'
+						+ (d.img ? '<img src="' + d.img + '" style="width:100%;height:100%;object-fit:cover"/>' : '<div style="width:56px;height:56px;background:#f2f2f2"></div>')
+						+ '</div><div><strong>' + d.name + '</strong><div class="text-muted small">' + (d.desc || '') + '</div>' + deliveryInfo + '</div></div></td>'
+						+ '<td>' + (d.category || '-') + '</td>'
+						+ '<td>' + Number(d.price).toLocaleString() + '</td>'
+						+ '<td>' + avail + '</td>'
+						+ '<td class="text-end table-actions">'
+						+ '<button class="btn btn-sm btn-outline-primary edit-dish">Edit</button>'
+						+ '<button class="btn btn-sm btn-outline-danger remove-dish">Remove</button>'
+						+ '<button class="btn btn-sm btn-outline-warning toggle-avail">' + (d.available ? 'Hide' : 'Show') + '</button>'
+						+ '</td></tr>';
+					$t.append(row);
+				});
+				$('#menu-count').text(dishes.length);
+				$('#available-count').text(dishes.filter(d => d.available).length);
+				var avg = dishes.length ? Math.round(dishes.reduce((s, x) => s + Number(x.price || 0), 0) / dishes.length) : 0;
+				$('#avg-price').text(avg.toLocaleString());
+				saveToStorage();
+			}
+
+			// image preview read
+			var selectedImageData = null;
+			$('#dish-image').on('change', function(e){
+				var f = this.files && this.files[0];
+				if(!f) { selectedImageData = null; $('#dish-image-preview').hide().attr('src',''); return; }
+				var reader = new FileReader();
+				reader.onload = function(ev){ selectedImageData = ev.target.result; $('#dish-image-preview').attr('src', selectedImageData).show(); };
+				reader.readAsDataURL(f);
+			});
+
+			loadFromStorage();
+			render();
+
+			$('#add-dish-btn').on('click', function () {
+				$('#dishModalLabel').text('Add Dish');
+				$('#dish-form')[0].reset();
+				$('#dish-id').val('');
+				selectedImageData = null;
+				$('#dish-image-preview').hide().attr('src','');
+				// defaults for delivery fields
+				$('#dish-deliverable').prop('checked', true);
+				$('#dish-delivery-fee').val(0);
+			});
+
+			$(document).on('click', '.edit-dish', function () {
+				var id = $(this).closest('tr').data('id');
+				var dish = dishes.find(d => d.id === id);
+				if (!dish) return;
+				$('#dish-id').val(dish.id);
+				$('#dish-name').val(dish.name);
+				$('#dish-category').val(dish.category);
+				$('#dish-price').val(dish.price);
+				$('#dish-available').prop('checked', dish.available);
+				$('#dish-desc').val(dish.desc || '');
+				// delivery fields populate
+				$('#dish-deliverable').prop('checked', !!dish.deliverable);
+				$('#dish-delivery-fee').val(Number(dish.deliveryFee||0));
+				selectedImageData = null; // only replace when user chooses a new file
+				if(dish.img){ $('#dish-image-preview').attr('src', dish.img).show(); } else { $('#dish-image-preview').hide().attr('src',''); }
+				$('#dishModalLabel').text('Edit Dish');
+				new bootstrap.Modal($('#dishModal')).show();
+			});
+
+			$('#save-dish').on('click', function () {
+				var idVal = $('#dish-id').val();
+				var id = idVal ? parseInt(idVal, 10) : 0;
+				var name = $('#dish-name').val().trim();
+				var category = $('#dish-category').val().trim();
+				var price = parseInt($('#dish-price').val(), 10) || 0;
+				var available = $('#dish-available').is(':checked');
+				var desc = $('#dish-desc').val().trim();
+				// read delivery fields
+				var deliverable = $('#dish-deliverable').is(':checked');
+				var deliveryFee = parseInt($('#dish-delivery-fee').val(), 10) || 0;
+
+				if (!name) return $('#dish-name').focus();
+				if (id) {
+					var d = dishes.find(x => x.id === id);
+					if (d) {
+						d.name = name; d.category = category; d.price = price; d.available = available; d.desc = desc;
+						d.deliverable = deliverable; d.deliveryFee = deliveryFee;
+						if(selectedImageData) d.img = selectedImageData;
+					}
+				} else {
+					var nid = dishes.length ? Math.max.apply(null, dishes.map(x => x.id)) + 1 : 1;
+					dishes.push({ id: nid, name: name, category: category, price: price, available: available, desc: desc, img: selectedImageData || '', deliverable: deliverable, deliveryFee: deliveryFee });
+				}
+				selectedImageData = null;
+				render();
+				$('#dishModal').modal('hide');
+			});
+
+			$(document).on('click', '.remove-dish', function () {
+				var id = $(this).closest('tr').data('id');
+				dishes = dishes.filter(d => d.id !== id);
+				render();
+			});
+
+			$(document).on('click', '.toggle-avail', function () {
+				var id = $(this).closest('tr').data('id');
+				var d = dishes.find(x => x.id === id);
+				if (d) { d.available = !d.available; render(); }
+			});
+
+			// allow refresh button to reload from storage
+			$('#refresh-menu').on('click', function(){
+				loadFromStorage(); render();
+			});
+		})();
+	</script>
+</body>
+</html>
